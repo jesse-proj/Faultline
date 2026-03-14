@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interact | Poverty & Globalization</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/hero.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    
+    <style>
+        .interact-page {
+            background-color: var(--bg-color);
+            min-height: 100vh;
+        }
+
+        .interact-header {
+            padding: 100px 2rem 30px; 
+            text-align: center;
+        }
+
+        .quiz-intro {
+            max-width: 800px;
+            margin: 0 auto 5rem;
+            text-align: center;
+        }
+
+        /* Modal Background */
+        .modal-overlay {
+            display: none; 
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* The Quiz Paper */
+        .modal-content {
+            max-width: 550px;
+            width: 90%;
+            padding: 3.5rem 3rem 3rem;
+            transform: rotate(-0.5deg); 
+            animation: modalPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.9) rotate(1deg); }
+            to { opacity: 1; transform: scale(1) rotate(-0.5deg); }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px; right: 20px;
+            background: none; border: none;
+            font-size: 2rem; cursor: pointer;
+            color: var(--text-light);
+        }
+
+        .feedback-text {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border-color);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            display: none;
+            color: var(--text-dark);
+        }
+    </style>
+</head>
+<body class="interact-page">
+
+    <div class="bg-grid"></div>
+
+    <nav>
+        <a href="index.html" class="logo">OurWorld</a>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="interact.html" class="active-link"><i class="fas fa-gamepad"></i> Interact</a></li>
+            <li><a href="read.html"><i class="fas fa-book-open"></i> Read</a></li>
+            <li><a href="index.html#references"><i class="fas fa-quote-right"></i> References</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <header class="interact-header reveal">
+            <p class="overtitle"><i class="fas fa-brain"></i> Knowledge Check</p>
+            <h2>Test Your Perspective</h2>
+        </header>
+
+        <div class="quiz-intro reveal">
+            <p class="section-desc">Select a module below to begin your evaluation. These quizzes use 2024-2026 socioeconomic reports to challenge common misconceptions about global wealth.</p>
+            
+            <div class="grid-2" style="margin-top: 2rem;">
+                <div class="card" style="padding: 2.5rem; cursor: pointer;" onclick="startQuiz('quickfire')">
+                    <i class="fas fa-bolt" style="color: var(--accent-red); margin-bottom: 15px; font-size: 2.5rem;"></i>
+                    <h3>Quick Fire</h3>
+                    <p>Rapid assessment of 2024-2026 global statistics and giving indices.</p>
+                </div>
+
+                <div class="card" style="padding: 2.5rem; cursor: pointer;" onclick="startQuiz('deepdive')">
+                    <i class="fas fa-history" style="color: var(--accent-red); margin-bottom: 15px; font-size: 2.5rem;"></i>
+                    <h3>Deep Dive</h3>
+                    <p>Analysis of colonial roots and systemic wealth drainage across the Global South.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="quiz-modal" class="modal-overlay">
+        <div class="modal-content card">
+            <button class="close-modal" onclick="closeQuiz()">&times;</button>
+            <div id="quiz-container">
+                <span class="question-meta" id="q-number">Question 1</span>
+                <h3 id="q-text" style="margin-top: 0.5rem;">Loading...</h3>
+                <div class="quiz-options" id="q-options"></div>
+                <div id="modal-feedback" class="feedback-text"></div>
+                <button id="next-btn" class="btn-primary" style="display:none; margin-top: 1.5rem; width: 100%; justify-content: center;" onclick="nextQuestion()">Next Question</button>
+            </div>
+        </div>
+    </div>
+
+    <footer id="references">
+        <span class="footer-logo">OurWorld</span>
+        <p>Interactive Data Module &copy; 2026</p>
+    </footer>
+
+    <script src="scripts/navbar.js"></script>
+    <script src="scripts/reveal.js"></script>
+    <script>
+        const quizzes = {
+            quickfire: [
+                {
+                    q: "Which nation currently holds the #1 spot on the World Giving Index?",
+                    options: ["USA", "Indonesia", "Norway"],
+                    correct: 1,
+                    info: "Indonesia has held the top spot for several years due to deep-rooted community help traditions."
+                },
+                {
+                    q: "In the Philippines, food poverty recently declined to what percentage?",
+                    options: ["19%", "25%", "32%"],
+                    correct: 0,
+                    info: "OCTA Research showed food poverty dropped to 19% by late 2025/early 2026."
+                }
+            ],
+            deepdive: [
+                {
+                    q: "At what rate is wealth extracted from the Global South to the Global North?",
+                    options: ["$1M / hour", "$10M / hour", "$30M / hour"],
+                    correct: 2,
+                    info: "Structural inequalities in trade result in a $30M/hour drain from developing nations."
+                },
+                {
+                    q: "How many of the world's poorest countries are primarily in Africa?",
+                    options: ["12 countries", "26 countries", "40 countries"],
+                    correct: 1,
+                    info: "The World Bank identifies 26 countries in extreme fiscal distress, mostly linked to colonial legacies."
+                },
+                {
+                    q: "What percentage of billionaire wealth is unearned (inheritance/cronyism)?",
+                    options: ["20%", "45%", "60%"],
+                    correct: 2,
+                    info: "Oxfam reports that 60% of billionaire wealth results from non-competitive or inherited sources."
+                }
+            ]
+        };
+
+        let activeQuiz = [];
+        let currentQ = 0;
+        let score = 0;
+
+        function startQuiz(type) {
+            activeQuiz = quizzes[type];
+            currentQ = 0; score = 0;
+            document.getElementById('quiz-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            showQuestion();
+        }
+
+        function closeQuiz() {
+            document.getElementById('quiz-modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            setTimeout(() => {
+                document.getElementById('quiz-container').innerHTML = `
+                    <span class="question-meta" id="q-number">Question 1</span>
+                    <h3 id="q-text" style="margin-top: 0.5rem;">Loading...</h3>
+                    <div class="quiz-options" id="q-options"></div>
+                    <div id="modal-feedback" class="feedback-text"></div>
+                    <button id="next-btn" class="btn-primary" style="display:none; margin-top: 1.5rem; width: 100%; justify-content: center;" onclick="nextQuestion()">Next Question</button>
+                `;
+            }, 500);
+        }
+
+        function showQuestion() {
+            const data = activeQuiz[currentQ];
+            document.getElementById('q-number').innerText = `Evidence File ${currentQ + 1} of ${activeQuiz.length}`;
+            document.getElementById('q-text').innerText = data.q;
+            document.getElementById('modal-feedback').style.display = 'none';
+            document.getElementById('next-btn').style.display = 'none';
+            
+            const optionsContainer = document.getElementById('q-options');
+            optionsContainer.innerHTML = '';
+            
+            data.options.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerHTML = `${opt} <span><i class="far fa-circle"></i></span>`;
+                btn.onclick = () => handleChoice(index, btn);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function handleChoice(index, btn) {
+            const data = activeQuiz[currentQ];
+            const buttons = document.querySelectorAll('#q-options .option-btn');
+            buttons.forEach(b => b.style.pointerEvents = 'none');
+
+            if (index === data.correct) {
+                btn.classList.add('correct');
+                btn.querySelector('i').className = 'fas fa-check-circle';
+                score++;
+            } else {
+                btn.classList.add('wrong');
+                btn.querySelector('i').className = 'fas fa-times-circle';
+                buttons[data.correct].classList.add('correct');
+            }
+
+            const feedback = document.getElementById('modal-feedback');
+            feedback.innerText = data.info;
+            feedback.style.display = 'block';
+            document.getElementById('next-btn').style.display = 'inline-flex';
+        }
+
+        function nextQuestion() {
+            currentQ++;
+            if (currentQ < activeQuiz.length) {
+                showQuestion();
+            } else {
+                document.getElementById('quiz-container').innerHTML = `
+                    <h3 style="text-align:center;">Evaluation Complete</h3>
+                    <p style="text-align:center; margin: 1rem 0;">Analysis: You correctly identified ${score} out of ${activeQuiz.length} metrics.</p>
+                    <button class="btn-primary" style="width:100%; justify-content:center;" onclick="closeQuiz()">Close File</button>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

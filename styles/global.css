@@ -1,0 +1,64 @@
+/* global.css */
+:root {
+    --bg-color: #f4f2ee;
+    --accent-red: #c45044;
+    --text-dark: #2a2a2a;
+    --text-light: #777777;
+    --white: #ffffff;
+    --border-color: #e0deda;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    scroll-behavior: smooth;
+}
+
+.bg-grid {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-size: 40px 40px;
+    background-image: 
+        linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+}
+
+section { margin-bottom: 5rem; }
+
+@media (max-width: 768px) {
+    .container { padding: 3rem 1.5rem; }
+}
+
+/* --- SCROLL REVEAL ANIMATION --- */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98); /* Less distance to travel = faster feel */
+    transition: all 0.4s ease-in; /* Faster exit when scrolling away */
+    will-change: transform, opacity; /* Optimizes browser performance */
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    /* This cubic-bezier gives it a snappy, high-end "pop" */
+    transition: 
+        opacity 0.4s ease-out, 
+        transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+}

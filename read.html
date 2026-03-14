@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read | Poverty & Globalization</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    
+    <style>
+        .read-page {
+            background-color: var(--bg-color);
+            min-height: 100vh;
+        }
+
+        .read-header {
+            padding: 140px 2rem 40px; 
+            text-align: center;
+        }
+
+        /* --- PREVIEW GRID --- */
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .preview-card {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .preview-text {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 4; 
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .read-more-link {
+            color: var(--accent-red);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: auto;
+        }
+
+        /* --- READER VIEW (NEWS ARTICLE STYLING) --- */
+        #reader-view {
+            display: none; 
+            max-width: 850px;
+            margin: 0 auto 4rem;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        /* Remove hover effect for the full reader view card */
+        #reader-view .card {
+            cursor: default;
+            transition: none; /* Disables the animation */
+        }
+        
+        #reader-view .card:hover {
+            transform: none !important; /* Forces it to stay flat */
+            box-shadow: 3px 5px 15px rgba(0,0,0,0.05) !important;
+            z-index: 1;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .back-btn:hover {
+            color: var(--accent-red);
+        }
+
+        .full-article {
+            display: none; 
+        }
+
+        .full-article.active {
+            display: block;
+        }
+
+        /* News Header */
+        .news-category {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .news-title {
+            font-size: 2.8rem;
+            line-height: 1.2;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .news-byline {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .news-byline strong {
+            color: var(--text-dark);
+        }
+
+        /* News Hero Image */
+        .news-hero-img {
+            width: 100%;
+            height: 400px;
+            background-color: #eee;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 2rem;
+            border-radius: 2px;
+            position: relative;
+        }
+
+        .img-caption {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-align: right;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* News Body */
+        .article-content .lead-text {
+            font-size: 1.25rem;
+            font-weight: 500;
+            line-height: 1.7;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .pull-quote {
+            border-left: 4px solid var(--accent-red);
+            padding-left: 1.5rem;
+            margin: 2.5rem 0;
+            font-size: 1.4rem;
+            font-style: italic;
+            font-weight: 500;
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body class="read-page">
+
+    <div class="bg-grid"></div>
+
+    <nav>
+        <a href="index.html" class="logo">OurWorld</a>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="interact.html"><i class="fas fa-gamepad"></i> Interact</a></li>
+            <li><a href="read.html" class="active-link"><i class="fas fa-book-open"></i> Read</a></li>
+            <li><a href="index.html#references"><i class="fas fa-quote-right"></i> References</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        
+        <header class="read-header reveal" id="page-header">
+            <p class="overtitle"><i class="fas fa-newspaper"></i> Editorial Archive</p>
+            <h2>Investigative Reports</h2>
+            <p class="section-desc">Select a dossier below to read full-length journalistic analyses on the systemic intersections of global wealth, climate inequality, and modern trade architectures.</p>
+        </header>
+
+        <div id="preview-grid" class="preview-grid reveal">
+            
+            <div class="card preview-card" onclick="openArticle('article-1')">
+                <div class="article-meta">
+                    <span style="color: var(--accent-red); font-weight: 700;">Economics</span>
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <h3 style="font-size: 1.4rem; margin-bottom: 1rem;">The Illusion of Shared Prosperity: Why Global Wealth Still Flows North</h3>
+                <p class="preview-text">For fifty years, the prevailing economic narrative promised that free-market globalization would naturally lift all boats. Yet, recent empirical data reveals a starkly different reality, showing a system built on wealth extraction rather than wealth generation...</p>
+                <span class="read-more-link">Read Full Report <i class="fas fa-arrow-right"></i></span>
+            </div>
+
+            <div class="card preview-card" onclick="openArticle('article-2')">
+                <div class="article-meta">
+                    <span style="color: var(--accent-red); font-weight: 700;">Environment</span>
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3 style="font-size: 1.4rem; margin-bottom: 1rem;">The Climate Debt: How Ecological Crises Deepen the North-South Divide</h3>
+                <p class="preview-text">Climate change is no longer just an ecological crisis; it is the most aggressive driver of modern situational poverty. As 26 nations face extreme fiscal distress, the reality of 'climate colonialism' is becoming impossible to ignore...</p>
+                <span class="read-more-link">Read Full Report <i class="fas fa-arrow-right"></i></span>
+            </div>
+
+            <div class="card preview-card" onclick="openArticle('article-3')">
+                <div class="article-meta">
+                    <span style="color: var(--accent-red); font-weight: 700;">Policy</span>
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3 style="font-size: 1.4rem; margin-bottom: 1rem;">Bucking the Trend: How the Philippines Dropped Poverty to 37%</h3>
+                <p class="preview-text">In a global landscape marred by inflation, the Philippines has managed a remarkable feat. Recent polling highlights a dramatic shift, serving as a potent reminder of the power of targeted local government interventions over macro-market reliance...</p>
+                <span class="read-more-link">Read Full Report <i class="fas fa-arrow-right"></i></span>
+            </div>
+
+            <div class="card preview-card" onclick="openArticle('article-4')">
+                <div class="article-meta">
+                    <span style="color: var(--accent-red); font-weight: 700;">Technology</span>
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3 style="font-size: 1.4rem; margin-bottom: 1rem;">The Invisible Barrier: How the Digital Divide Cements Generational Poverty</h3>
+                <p class="preview-text">While the world becomes increasingly interconnected, access to the digital economy remains deeply unequal. The assumption that smartphones have democratized access ignores the stark reality of broadband infrastructure in the Global South...</p>
+                <span class="read-more-link">Read Full Report <i class="fas fa-arrow-right"></i></span>
+            </div>
+
+        </div>
+
+        <div id="reader-view">
+            <button class="back-btn" onclick="closeArticle()"><i class="fas fa-arrow-left"></i> Back to Archive</button>
+            
+            <div class="card" style="padding: 4rem;">
+                
+                <article id="article-1" class="full-article">
+                    <span class="news-category">Global Economics</span>
+                    <h1 class="news-title">The Illusion of Shared Prosperity: Why Global Wealth Still Flows North</h1>
+                    
+                    <div class="news-byline">
+                        <span>By <strong>Dr. Aris Thorne</strong></span>
+                        <span>|</span>
+                        <span>Published: March 12, 2026</span>
+                        <span>|</span>
+                        <span>Reading Time: 4 min</span>
+                    </div>
+
+                    <div class="news-hero-img" style="background-image: url('https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=2070&auto=format&fit=crop');"></div>
+                    <p class="img-caption">Global financial centers continue to act as wealth magnets, draining capital from developing regions.</p>
+
+                    <div class="article-content">
+                        <p class="lead-text">For fifty years, the prevailing economic narrative suggested that free-market globalization would naturally lift all boats. However, empirical data from the last decade paints a starkly different reality—one of systemic extraction rather than mutual generation.</p>
+                        
+                        <p>While extreme poverty indices have indeed dropped in rapidly industrializing regions like East Asia, the structural design of global trade continues to extract wealth from the Global South at a breathtaking pace. Current estimates suggest that value is drained from developing nations to the Global North at a rate of roughly $30 million an hour. This is not the result of a failing system, economists argue, but rather a system functioning exactly as designed.</p>
+                        
+                        <p>This paradox—where global GDP grows while localized purchasing power stagnates—is driven largely by the mechanics of unequal exchange. Developing nations frequently export raw materials and human labor at highly suppressed costs. These raw inputs are then processed in the Global North and sold back to the South as finished technological, agricultural, and medical goods at massive premiums.</p>
+
+                        <div class="pull-quote">
+                            "We are not looking at a gap in development; we are looking at a deliberate architecture of extraction. The Global South is not lagging behind—it is being actively depleted."
+                        </div>
+
+                        <p>Furthermore, the legacy of Structural Adjustment Programs (SAPs) mandated by international financial institutions in the late 20th century forced many developing nations to privatize public assets and slash social safety nets to qualify for loans. This historical debt burden ensures that instead of investing in education and infrastructure, vast amounts of Southern capital are continually diverted northwards simply to service interest payments.</p>
+
+                        <p>Consequently, the wealth generated by globalization tends to pool aggressively at the top. Recent Oxfam reports indicate that the richest 1% now capture nearly twice as much new wealth as the rest of humanity combined. Until the foundational rules of international trade, intellectual property, and sovereign debt are rewritten, globalization will remain a tool of division rather than unification.</p>
+                    </div>
+                </article>
+
+                <article id="article-2" class="full-article">
+                    <span class="news-category">Environmental Justice</span>
+                    <h1 class="news-title">The Climate Debt: How Ecological Crises Deepen the North-South Divide</h1>
+                    
+                    <div class="news-byline">
+                        <span>By <strong>Elena Rostova</strong></span>
+                        <span>|</span>
+                        <span>Published: February 28, 2026</span>
+                        <span>|</span>
+                        <span>Reading Time: 4 min</span>
+                    </div>
+
+                    <div class="news-hero-img" style="background-image: url('https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?q=80&w=2070&auto=format&fit=crop');"></div>
+                    <p class="img-caption">Droughts in Sub-Saharan Africa are wiping out generations of agricultural progress.</p>
+
+                    <div class="article-content">
+                        <p class="lead-text">Climate change is no longer merely an ecological crisis. In 2026, it is recognized as the single most aggressive driver of modern situational poverty, acting as a profound multiplier of existing inequalities.</p>
+                        
+                        <p>The World Bank currently identifies 26 nations as being in "extreme fiscal distress," the vast majority of which are situated in Sub-Saharan Africa. The bitter irony of this distress is rooted in the origins of the crisis: these nations contribute a fraction of a percent to global historical carbon emissions, yet they bear the immediate, catastrophic brunt of climate volatility.</p>
+
+                        <p>When unprecedented monsoons destroy supply chains in South Asia, or multi-year droughts trigger massive crop failures in the Horn of Africa, generational wealth is wiped out overnight. Families are forced to sell off assets, pull children from school, and migrate, transforming stable communities into populations defined by absolute poverty.</p>
+
+                        <div class="pull-quote">
+                            "This creates a brutal feedback loop: climate disasters mandate emergency borrowing from the North, which deepens national debt, which prevents any future investment in climate-resilient infrastructure."
+                        </div>
+
+                        <p>This dynamic has birthed the concept of "climate colonialism." Because these vulnerable nations are already burdened by historic debt, they lack the sovereign capital required to build seawalls, transition to drought-resistant agriculture, or reinforce power grids. They are forced to take on high-interest loans from the very countries responsible for the emissions that caused the disaster in the first place.</p>
+
+                        <p>While recent international summits have finally established the framework for a "Loss and Damage" fund, critics argue the capital committed is a drop in the ocean compared to the actual economic damage being inflicted. Environmental justice advocates assert that true progress requires recognizing climate finance not as charity, but as reparations for ecological debt.</p>
+                    </div>
+                </article>
+
+                <article id="article-3" class="full-article">
+                    <span class="news-category">Public Policy</span>
+                    <h1 class="news-title">Bucking the Trend: How the Philippines Dropped Poverty to 37%</h1>
+                    
+                    <div class="news-byline">
+                        <span>By <strong>Mateo V. Santos</strong></span>
+                        <span>|</span>
+                        <span>Published: March 16, 2026</span>
+                        <span>|</span>
+                        <span>Reading Time: 3 min</span>
+                    </div>
+
+                    <div class="news-hero-img" style="background-image: url('https://images.unsplash.com/photo-1518481852452-9415b262eba4?q=80&w=2080&auto=format&fit=crop');"></div>
+                    <p class="img-caption">Targeted government interventions in Manila and rural provinces have stabilized purchasing power.</p>
+
+                    <div class="article-content">
+                        <p class="lead-text">Despite the daunting macro-level challenges posed by unequal global markets, targeted domestic policies continue to prove that poverty is not an insurmountable law of nature. The Philippines currently stands as a vital case study in intervention.</p>
+                        
+                        <p>Recent national polling from OCTA Research highlights a dramatic and highly encouraging shift. By the first quarter of 2026, "self-rated poverty" in the Philippines dropped to 37%—the lowest recorded figure in nearly two years. Crucially, self-rated "food poverty" plummeted to just 19%. In human terms, this translates to an estimated 4.5 million Filipino families successfully lifting themselves out of perceived financial distress over a relatively short period.</p>
+
+                        <p>This progress was not an accidental byproduct of a booming global market. In fact, it occurred against a backdrop of global inflation. Rather, economists attribute this success to aggressive, localized, and strategic government interventions that shielded the most vulnerable sectors of society.</p>
+
+                        <div class="pull-quote">
+                            "It serves as a potent reminder that while global systems dictate macro trends, a government's willingness to directly intervene remains the strongest shield against poverty."
+                        </div>
+
+                        <p>A central pillar of this success has been the expansion and refinement of the Pantawid Pamilyang Pilipino Program (4Ps), a conditional cash transfer initiative that keeps children in school and mandates health check-ups. Coupled with a resilient 5.5% national economic growth rate, the administration implemented highly targeted fuel subsidies specifically for agricultural workers and public transport drivers, directly cutting the cost of moving food from farms to urban centers.</p>
+
+                        <p>By focusing heavily on stabilizing inflation for basic commodities rather than relying solely on abstract GDP growth, the Philippine model demonstrates that poverty alleviation requires a scalpel, not just a rising tide. For other nations in the Global South, it offers a blueprint for creating domestic economic buffers against a turbulent global economy.</p>
+                    </div>
+                </article>
+
+                <article id="article-4" class="full-article">
+                    <span class="news-category">Technology & Access</span>
+                    <h1 class="news-title">The Invisible Barrier: How the Digital Divide Cements Generational Poverty</h1>
+                    
+                    <div class="news-byline">
+                        <span>By <strong>Sarah Lin</strong></span>
+                        <span>|</span>
+                        <span>Published: March 14, 2026</span>
+                        <span>|</span>
+                        <span>Reading Time: 4 min</span>
+                    </div>
+
+                    <div class="news-hero-img" style="background-image: url('https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop');"></div>
+                    <p class="img-caption">Without reliable broadband infrastructure, rural students fall behind in the globalized education system.</p>
+
+                    <div class="article-content">
+                        <p class="lead-text">The tech-optimist narrative of the early 2000s insisted that the internet would be the great equalizer. Yet, as the global economy transitions almost entirely to digital platforms, lack of internet access has created a new, invisible barrier to social mobility.</p>
+                        
+                        <p>Current estimates indicate that roughly 2.6 billion people remain completely offline. The assumption that cheap smartphones have democratized access ignores a stark reality: a phone is useless without reliable, affordable broadband infrastructure. In rural parts of the Global South, and even in marginalized urban sectors of the Global North, data costs relative to income remain prohibitively high.</p>
+                        
+                        <p>This digital divide directly fuels intergenerational poverty. During an era where essential services, from banking and healthcare to education and government aid, are digitized, being offline means being systematically excluded from modern society. Students without internet access at home are unable to complete standard assignments, putting them at an immediate disadvantage in an increasingly competitive, globalized job market.</p>
+
+                        <div class="pull-quote">
+                            "Internet access is no longer a luxury or a modern convenience; it is the fundamental infrastructure of the 21st-century economy. Denying it is a form of economic redlining."
+                        </div>
+
+                        <p>Furthermore, the rise of the digital gig economy was touted as a way for individuals in developing nations to earn Western wages. However, to participate in global freelance platforms, workers need stable high-speed connections and consistent electricity—luxuries unavailable to the poorest demographics. Instead of democratizing work, remote platforms often benefit the already-connected middle class, widening inequality within developing nations themselves.</p>
+
+                        <p>The United Nations has increasingly pushed to classify broadband access as a fundamental human right. Until infrastructure development is prioritized not just in profitable metropolitan hubs, but in deeply rural and impoverished communities, the internet will continue to serve as a walled garden for the privileged, rather than the great equalizer it was promised to be.</p>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <span class="footer-logo">OurWorld</span>
+        <p>A digital project exploring socioeconomic data, human rights, and the duality of globalization.</p>
+        <p style="margin-top: 1rem; font-size: 0.75rem;">&copy; 2026 Socioeconomic Data Project.</p>
+    </footer>
+
+    <script src="scripts/navbar.js"></script>
+    <script src="scripts/reveal.js"></script>
+    <script>
+        function openArticle(articleId) {
+            document.getElementById('preview-grid').style.display = 'none';
+            document.getElementById('page-header').style.display = 'none';
+            
+            const articles = document.querySelectorAll('.full-article');
+            articles.forEach(art => art.classList.remove('active'));
+            
+            document.getElementById('reader-view').style.display = 'block';
+            document.getElementById(articleId).classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function closeArticle() {
+            document.getElementById('reader-view').style.display = 'none';
+            document.getElementById('preview-grid').style.display = 'grid';
+            document.getElementById('page-header').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+/* navbar.css */
+nav {
+    position: fixed;
+    top: 0; left: 0; width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+nav.scrolled {
+    background-color: var(--white);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    padding: 1rem 3rem;
+}
+
+.logo {
+    font-family: 'Kalam', cursive;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent-red);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--accent-red);
+}
+
+.nav-links .active-link {
+    background-color: rgba(196, 80, 68, 0.1);
+    color: var(--accent-red);
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+}
+
+.nav-links i.fa-chevron-down {
+    font-size: 0.7rem;
+    color: var(--text-light);
+}
+
+@media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    nav.scrolled { padding: 0.8rem 1.5rem; }
+    .nav-links { display: none; }
+}
