@@ -1,0 +1,30 @@
+.map-wrapper {
+    width: 100%;
+    height: 450px; /* Kept smaller to fit as a section */
+    margin: 2rem 0;
+    border: 1px solid var(--border-color);
+    background-color: #e5e9ec; /* Water color */
+    position: relative;
+    box-shadow: inset 0 4px 10px rgba(0,0,0,0.05); 
+}
+
+#global-heatmap {
+    width: 100%;
+    height: 100%;
+}
+
+.map-notes {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-family: 'Poppins', sans-serif;
+    border-top: 2px dashed var(--border-color);
+    padding-top: 1rem;
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+    .map-wrapper { height: 350px; }
+    .map-notes { flex-direction: column; gap: 0.5rem; }
+}

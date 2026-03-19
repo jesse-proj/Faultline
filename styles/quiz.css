@@ -1,0 +1,61 @@
+.interact-page {
+    background-color: var(--bg-color);
+    min-height: 100vh;
+}
+
+.interact-header {
+    padding: 100px 2rem 30px; 
+    text-align: center;
+}
+
+.quiz-intro {
+    max-width: 800px;
+    margin: 0 auto 5rem;
+    text-align: center;
+}
+
+/* Modal Background */
+.modal-overlay {
+    display: none; 
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+/* The Quiz Paper */
+.modal-content {
+    max-width: 550px;
+    width: 90%;
+    padding: 3.5rem 3rem 3rem;
+    transform: rotate(-0.5deg); 
+    animation: modalPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+}
+
+@keyframes modalPop {
+    from { opacity: 0; transform: scale(0.9) rotate(1deg); }
+    to { opacity: 1; transform: scale(1) rotate(-0.5deg); }
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px; right: 20px;
+    background: none; border: none;
+    font-size: 2rem; cursor: pointer;
+    color: var(--text-light);
+}
+
+.feedback-text {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--border-color);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    display: none;
+    color: var(--text-dark);
+}
