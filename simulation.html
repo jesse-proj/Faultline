@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulation | Poverty & Globalization</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="styles/global.css">
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/footer.css">
+    
+    <style>
+        .sim-page { background-color: var(--bg-color); min-height: 100vh; }
+        .sim-header { padding: 140px 2rem 40px; text-align: center; }
+
+        .game-container { max-width: 800px; margin: 0 auto; }
+
+        .game-stats {
+            display: flex; justify-content: space-between; gap: 2rem;
+            margin-bottom: 2.5rem; padding-bottom: 2rem;
+            border-bottom: 2px dashed var(--border-color);
+        }
+
+        .stat-item { flex: 1; text-align: center; }
+        .stat-label { 
+            font-size: 0.85rem; font-weight: 700; text-transform: uppercase; 
+            color: var(--text-light); margin-bottom: 0.5rem; display: block; letter-spacing: 1px;
+        }
+        
+        .progress-bg { background: #eee; height: 10px; border-radius: 5px; overflow: hidden; width: 100%; }
+        .progress-fill { height: 100%; transition: width 0.4s ease, background-color 0.4s ease; }
+        
+        .game-text { font-size: 1.15rem; line-height: 1.8; margin-bottom: 3rem; color: var(--text-dark); }
+        .game-text strong { font-size: 1.25rem; display: block; margin-bottom: 0.5rem; }
+        
+        .game-choices { display: flex; flex-direction: column; gap: 1rem; }
+        .game-btn {
+            background: #f9f9f9; border: 1px solid var(--border-color);
+            padding: 1.5rem; text-align: left; font-family: 'Poppins', sans-serif;
+            cursor: pointer; transition: all 0.2s ease; border-radius: 2px;
+            font-size: 1rem; line-height: 1.5; display: flex; justify-content: space-between; align-items: center;
+        }
+        
+        .game-btn:hover { background: #eee; border-color: var(--text-dark); transform: translateX(5px); }
+        .game-btn span:last-child { font-size: 0.85rem; color: var(--text-light); font-style: italic; font-weight: 600; white-space: nowrap; margin-left: 1rem; }
+
+        @media (max-width: 768px) {
+            .game-stats { gap: 1rem; }
+            .game-btn { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+            .game-btn span:last-child { margin-left: 0; }
+        }
+    </style>
+</head>
+<body class="sim-page">
+
+    <div class="bg-grid"></div>
+
+    <nav>
+        <a href="index.html" class="logo">Rise Above Poverty</a>
+        <ul class="nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="interact.html"><i class="fas fa-gamepad"></i> Interact</a></li>
+            <li><a href="read.html"><i class="fas fa-book-open"></i> Read</a></li>
+            <li><a href="index.html#references"><i class="fas fa-quote-right"></i> References</a></li>
+        </ul>
+    </nav>
+
+    <div class="container game-container">
+        <header class="sim-header reveal">
+            <p class="overtitle"><i class="fas fa-route"></i> Interactive Case Study</p>
+            <h2 id="page-title">Loading Simulation...</h2>
+        </header>
+
+        <div class="reveal">
+            <section class="paper-sheet" style="padding: 3rem;">
+                
+                <div class="game-stats" id="dynamic-stats">
+                    </div>
+
+                <div id="game-narrative" class="game-text"></div>
+                
+                <div id="game-options" class="game-choices"></div>
+                
+            </section>
+        </div>
+    </div>
+
+    <footer id="references" style="margin-top: 5rem;">
+        <span class="footer-logo">OurWorld</span>
+        <p>Interactive Data Module &copy; 2026</p>
+    </footer>
+
+    <script src="scripts/navbar.js"></script>
+    <script src="scripts/reveal.js"></script>
+    <script>
+        // --- GAME CONFIGURATIONS ---
+        const gamesConfig = {
+            supplyChain: {
+                title: "The Supply Chain",
+                themeColor: "var(--accent-red)",
+                statKeys: [
+                    { id: 'stat1', name: 'Health', color: '#4caf50' },
+                    { id: 'stat2', name: 'Savings', color: '#2196f3' },
+                    { id: 'stat3', name: 'Family', color: '#ff9800' }
+                ],
+                initialStats: { stat1: 80, stat2: 30, stat3: 70 },
+                nodes: [
+                    {
+                        text: "<strong style='color: var(--accent-red);'>Day 1: The Factory Floor.</strong> You recently left your province to take a job at a global electronics assembly plant in Caloocan. You live in a cramped boarding house. Your goal: survive the high cost of living in the city and send remittance back to your family. Today, the floor manager demands everyone work an unsanctioned 14-hour shift to meet an international export quota.",
+                        choices: [
+                            { text: "Work the 14-hour shift. The money is necessary.", impact: { stat1: -20, stat2: 20, stat3: 0 } },
+                            { text: "Refuse and go back to your boarding house. You need rest.", impact: { stat1: 10, stat2: -10, stat3: 0 } }
+                        ]
+                    },
+                    {
+                        text: "<strong style='color: var(--accent-red);'>Day 12: The Remittance.</strong> Payday has arrived. Your family back in the province messages you—your younger sister needs money for school fees, and a recent storm damaged the roof. However, your rent is due tomorrow, and food prices have surged due to inflation.",
+                        choices: [
+                            { text: "Send the full amount they requested. They need it more.", impact: { stat1: 0, stat2: -40, stat3: 30 } },
+                            { text: "Send only half. You must secure your rent and food first.", impact: { stat1: 0, stat2: 10, stat3: -25 } }
+                        ]
+                    },
+                    {
+                        text: "<strong style='color: var(--accent-red);'>Day 19: The Cough.</strong> The poor ventilation in the factory has caught up to you. You've developed a severe, rattling cough and are struggling to hit your assembly quotas.",
+                        choices: [
+                            { text: "Buy cheap over-the-counter medicine and work through the pain.", impact: { stat1: -30, stat2: -10, stat3: 0 } },
+                            { text: "Take an unpaid sick day to wait in line at a public clinic.", impact: { stat1: 20, stat2: -25, stat3: 0 } }
+                        ]
+                    },
+                    {
+                        text: "<strong style='color: var(--accent-red);'>Day 26: The Gig Economy.</strong> A co-worker suggests you buy a used smartphone on a high-interest credit plan to do delivery gigs on your single day off. 'It's the only way to get ahead,' he says.",
+                        choices: [
+                            { text: "Take on the debt and buy the phone to hustle on weekends.", impact: { stat1: -20, stat2: -10, stat3: 15 } },
+                            { text: "Refuse the debt. Stick to the grueling factory schedule.", impact: { stat1: 10, stat2: 10, stat3: -10 } }
+                        ]
+                    }
+                ],
+                gameOverText: "System Failure: Without a social safety net, you have run out of resources. You are forced to take out predatory loans just to survive, locking you into a cycle of inescapable debt.",
+                endingText: "You made it to the end of the month. You are surviving, but not thriving. You remain exactly one medical emergency or missed shift away from total ruin. This is the precarious reality of the global supply chain."
+            },
+
+            theYield: {
+                title: "The Yield",
+                themeColor: "#4caf50",
+                statKeys: [
+                    { id: 'stat1', name: 'Crop Yield', color: '#4caf50' },
+                    { id: 'stat2', name: 'Funds', color: '#2196f3' },
+                    { id: 'stat3', name: 'Household Food', color: '#ff9800' }
+                ],
+                initialStats: { stat1: 70, stat2: 40, stat3: 60 },
+                nodes: [
+                    {
+                        text: "<strong style='color: #4caf50;'>Season 1: The Drought.</strong> You are a smallholder farmer. The rainy season is four weeks late—a direct result of shifting global climate patterns. Your traditional seeds are failing. An international agro-corp offers you a micro-loan to buy their patented, drought-resistant seeds.",
+                        choices: [
+                            { text: "Take the loan and buy the patented seeds.", impact: { stat1: 30, stat2: -30, stat3: 0 } },
+                            { text: "Rely on tradition and aggressively conserve water.", impact: { stat1: -30, stat2: 10, stat3: 0 } }
+                        ]
+                    },
+                    {
+                        text: "<strong style='color: #4caf50;'>Season 2: The Market Crash.</strong> You have finally harvested your crop. However, a sudden trade war between two global superpowers has caused international commodity prices to crash completely.",
+                        choices: [
+                            { text: "Sell immediately to the international broker to pay off debts.", impact: { stat1: -50, stat2: 30, stat3: -20 } },
+                            { text: "Hold the crop in your silo hoping prices rebound, risking pests.", impact: { stat1: -20, stat2: -10, stat3: 15 } }
+                        ]
+                    },
+                    {
+                        text: "<strong style='color: #4caf50;'>Season 3: The Land Grab.</strong> A foreign agribusiness representative arrives. They want to buy half of your ancestral land to build a monoculture plantation. They offer a lump sum of cash.",
+                        choices: [
+                            { text: "Sell half your land. You desperately need the money.", impact: { stat1: -40, stat2: 40, stat3: -10 } },
+                            { text: "Refuse the offer. The land stays in the family.", impact: { stat1: 10, stat2: -15, stat3: 10 } }
+                        ]
+                    },
+                    {
+                        text: "<strong style='color: #4caf50;'>Season 4: The Squeeze.</strong> Global inflation has caused fertilizer prices to triple. It is time to prep the soil for next year, but you can barely afford the inputs.",
+                        choices: [
+                            { text: "Take out another high-interest local loan to buy fertilizer.", impact: { stat1: 30, stat2: -25, stat3: 0 } },
+                            { text: "Forgo the fertilizer and accept that next year's yield will be low.", impact: { stat1: -30, stat2: 15, stat3: -10 } }
+                        ]
+                    }
+                ],
+                gameOverText: "Foreclosure: Your funds have completely dried up, or your crops have entirely failed. You are forced to sell your land to the international agribusiness and move to an urban slum to find wage labor.",
+                endingText: "You survived the harvest cycle, but the structural odds are stacked against you. As climate volatility worsens and global markets dictate your prices, keeping your ancestral land becomes a brutal, year-by-year struggle."
+            },
+
+            theExtraction: {
+                title: "The Extraction",
+                themeColor: "#5e35b1",
+                statKeys: [
+                    { id: 'stat1', name: 'Daily Quota', color: '#5e35b1' },
+                    { id: 'stat2', name: 'Physical Safety', color: '#4caf50' },
+                    { id: 'stat3', name: "Child's Future", color: '#2196f3' }
+                ],
+                initialStats: { stat1: 40, stat2: 70, stat3: 60 },
+                nodes: [
+                    {
+                        text: "<strong style='color: #5e35b1;'>Shift 1: The Deep Vein.</strong> You are an artisanal miner in the DRC. The surface ore in your designated sector is depleted. To meet the quota set by the middlemen who supply global tech giants, you must dig deeper into narrow, hand-dug tunnels that lack structural support.",
+                        choices: [
+                            { text: "Dig deep into the unstable shaft for high-grade ore.", impact: { stat1: 30, stat2: -30, stat3: 0 } },
+                            { text: "Stay near the surface, scavenging scraps safely.", impact: { stat1: -20, stat2: 10, stat3: 0 } }
+                        ]
+                    },
+                    {
+                        text: "<strong style='color: #5e35b1;'>Shift 2: The Global Market.</strong> Cobalt prices hit a record high due to an electric vehicle boom in the West. However, the local buyer refuses to raise the price he pays you, claiming 'transport costs' eat the profits. This is a modern echo of colonial extraction.",
+                        choices: [
+                            { text: "Accept the unfair price. You need to buy food today.", impact: { stat1: 20, stat2: 0, stat3: -15 } },
+                            { text: "Strike with other miners, demanding a fair cut of the global boom.", impact: { stat1: -25, stat2: -20, stat3: 20 } }
+                        ]
+                    },
+                    {
+                        text: "<strong style='color: #5e35b1;'>Shift 3: The Toll.</strong> You suffer a respiratory infection from inhaling toxic cobalt dust without protective gear. You cannot work for three days. Your 12-year-old son offers to take your place in the pit so the family doesn't starve.",
+                        choices: [
+                            { text: "Let your son work temporarily. Survival comes first.", impact: { stat1: 30, stat2: 0, stat3: -45 } },
+                            { text: "Forbid him from working and take a predatory loan to buy food.", impact: { stat1: -30, stat2: 10, stat3: 15 } }
+                        ]
+                    },
+                    {
+                        text: "<strong style='color: #5e35b1;'>Shift 4: The Audit.</strong> An international NGO arrives to audit the mine for a 'clean supply chain' report. The mine boss orders everyone to hide the children and pretend safety conditions are perfect, promising a cash bonus to those who comply.",
+                        choices: [
+                            { text: "Take the bonus and hide the truth from the auditors.", impact: { stat1: 30, stat2: -15, stat3: -10 } },
+                            { text: "Speak to the auditors about the real conditions, risking retaliation.", impact: { stat1: -20, stat2: -40, stat3: 30 } }
+                        ]
+                    }
+                ],
+                gameOverText: "System Collapse: Whether through a physical cave-in or financial ruin, the burden was too heavy. Your family is trapped in the cycle of extraction, a modern casualty of the global tech supply chain.",
+                endingText: "You survived the month. The minerals you extracted by hand will power the wealthiest, most technologically advanced societies on Earth, yet your community remains in extreme poverty. The colonial legacy simply changed its name."
+            }
+        };
+
+        // --- ENGINE LOGIC ---
+        let currentGame;
+        let pStats = {};
+        let currentStep = 0;
+
+        function initGame() {
+            // Get URL parameter (e.g., ?game=theYield)
+            const urlParams = new URLSearchParams(window.location.search);
+            const gameId = urlParams.get('game') || 'supplyChain'; // Default fallback
+            
+            currentGame = gamesConfig[gameId];
+            pStats = { ...currentGame.initialStats };
+            currentStep = 0;
+
+            // Update UI Title
+            document.getElementById('page-title').innerText = currentGame.title;
+
+            // Build Stat Bars Dynamically
+            const statsContainer = document.getElementById('dynamic-stats');
+            statsContainer.innerHTML = '';
+            
+            currentGame.statKeys.forEach(stat => {
+                statsContainer.innerHTML += `
+                    <div class="stat-item">
+                        <span class="stat-label">${stat.name}</span>
+                        <div class="progress-bg">
+                            <div id="bar-${stat.id}" class="progress-fill" style="width: ${pStats[stat.id]}%; background-color: ${stat.color};"></div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            renderStoryNode();
+        }
+
+        function renderStoryNode() {
+            // Check Failure Conditions
+            if (pStats.stat1 <= 0 || pStats.stat2 <= 0 || pStats.stat3 <= 0) {
+                return triggerGameOver();
+            }
+
+            // Check Win Condition
+            if (currentStep >= currentGame.nodes.length) {
+                return triggerEnding();
+            }
+
+            const node = currentGame.nodes[currentStep];
+            document.getElementById('game-narrative').innerHTML = node.text;
+            
+            const optionsContainer = document.getElementById('game-options');
+            optionsContainer.innerHTML = '';
+
+            node.choices.forEach((choice) => {
+                const btn = document.createElement('button');
+                btn.className = 'game-btn';
+                
+                let impactStr = [];
+                if(choice.impact.stat1 !== 0) impactStr.push(`${currentGame.statKeys[0].name} ${choice.impact.stat1 > 0 ? '+' : ''}${choice.impact.stat1}`);
+                if(choice.impact.stat2 !== 0) impactStr.push(`${currentGame.statKeys[1].name} ${choice.impact.stat2 > 0 ? '+' : ''}${choice.impact.stat2}`);
+                if(choice.impact.stat3 !== 0) impactStr.push(`${currentGame.statKeys[2].name} ${choice.impact.stat3 > 0 ? '+' : ''}${choice.impact.stat3}`);
+                
+                btn.innerHTML = `<span>${choice.text}</span> <span style="color: ${currentGame.themeColor}">[ ${impactStr.join(' | ')} ]</span>`;
+                btn.onclick = () => handleGameChoice(choice.impact);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function handleGameChoice(impact) {
+            // Update stats
+            pStats.stat1 = Math.min(100, Math.max(0, pStats.stat1 + impact.stat1));
+            pStats.stat2 = Math.min(100, Math.max(0, pStats.stat2 + impact.stat2));
+            pStats.stat3 = Math.min(100, Math.max(0, pStats.stat3 + impact.stat3));
+
+            // Animate Bars
+            currentGame.statKeys.forEach(stat => {
+                const bar = document.getElementById(`bar-${stat.id}`);
+                bar.style.width = pStats[stat.id] + '%';
+                // Turn red if danger zone (<25%)
+                bar.style.backgroundColor = pStats[stat.id] < 25 ? '#c45044' : stat.color;
+            });
+
+            currentStep++;
+            setTimeout(renderStoryNode, 400); 
+        }
+
+        function triggerGameOver() {
+            document.getElementById('game-narrative').innerHTML = `<strong style="color: #c45044; font-size: 1.5rem;">CRITICAL FAILURE</strong><p>${currentGame.gameOverText}</p>`;
+            document.getElementById('game-options').innerHTML = `<button class="btn-primary" style="justify-content:center; width: 200px; margin: 0 auto; background-color: ${currentGame.themeColor}; border: none;" onclick="window.location.reload()">Restart Simulation</button>`;
+        }
+
+        function triggerEnding() {
+            document.getElementById('game-narrative').innerHTML = `<strong style="color: ${currentGame.themeColor}; font-size: 1.5rem;">Simulation Complete</strong><p>${currentGame.endingText}</p>`;
+            document.getElementById('game-options').innerHTML = `<button class="btn-primary" style="justify-content:center; width: 200px; margin: 0 auto; background-color: ${currentGame.themeColor}; border: none;" onclick="window.location.href='interact.html'">Back to Interact</button>`;
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', initGame);
+    </script>
+</body>
+</html>
