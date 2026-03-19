@@ -4,10 +4,13 @@ header.hero {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    text-align: center;
+    /* Aligns all items to the right edge of our invisible center column */
+    align-items: flex-end; 
+    /* Ensures multi-line text is flush right */
+    text-align: right;     
     position: relative;
-    padding: 0 2rem;
+    /* The Magic Formula: Centers an 800px column, with a 2rem minimum safe margin on smaller screens */
+    padding: 0 max(2rem, calc(50vw - 400px)); 
     overflow: hidden; 
     background-color: var(--bg-color); 
 }
@@ -24,7 +27,7 @@ header.hero {
     align-items: center;
     gap: 0.5rem;
     position: relative; 
-    z-index: 3; /* Bumped up to stay above the new grid */
+    z-index: 3; 
 }
 
 .overtitle i { 
@@ -32,30 +35,26 @@ header.hero {
 }
 
 .hero h1 {
-    font-family: 'Kalam', cursive;
-    font-size: 5.5rem;
+    font-family: var(--font-header);
+    font-size: 6.5rem; 
     line-height: 1.1;
     color: var(--text-dark);
     margin-bottom: 1.5rem;
     position: relative; 
-    z-index: 3; /* Bumped up */
-    text-align: right;
+    z-index: 3; 
 }
 
 .hero p.subtitle {
-    font-family: 'Poppins', sans-serif; 
-    font-size: 1.1rem;
+    font-size: 1.25rem; /* Bumped up from 1.1rem */
     color: var(--text-light);
     margin-bottom: 2.5rem;
-    max-width: 600px;
     position: relative; 
-    z-index: 3; /* Bumped up */
+    z-index: 3; 
 }
 
-/* Ensure button stays layered above the slideshow */
 .btn-primary {
     position: relative;
-    z-index: 3; /* Bumped up */
+    z-index: 3; 
 }
 
 /* --- HERO SLIDESHOW & FILTERS --- */
@@ -83,13 +82,12 @@ header.hero {
     content: '';
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    /* Draws a tiny 6px repeating grid */
     background-image: 
         linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
     background-size: 6px 6px; 
-    z-index: 2; /* Sits between the color overlay and the text */
-    pointer-events: none; /* Ensures the grid doesn't block mouse clicks */
+    z-index: 2; 
+    pointer-events: none; 
 }
 
 /* The Slides */
@@ -118,6 +116,6 @@ header.hero {
 }
 
 @media (max-width: 768px) {
-    .hero h1 { font-size: 3rem; }
-    .hero p.subtitle { font-size: 1rem; }
+    .hero h1 { font-size: 3.5rem; } 
+    .hero p.subtitle { font-size: 1.1rem; } /* Bumped up slightly for mobile */
 }

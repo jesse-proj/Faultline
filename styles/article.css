@@ -51,14 +51,13 @@
     animation: fadeIn 0.4s ease-out;
 }
 
-/* Remove hover effect for the full reader view card */
 #reader-view .card {
     cursor: default;
-    transition: none; /* Disables the animation */
+    transition: none; 
 }
 
 #reader-view .card:hover {
-    transform: none !important; /* Forces it to stay flat */
+    transform: none !important; 
     box-shadow: 3px 5px 15px rgba(0,0,0,0.05) !important;
     z-index: 1;
 }
@@ -72,7 +71,7 @@
     background: none;
     border: none;
     color: var(--text-light);
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-text);
     font-weight: 600;
     font-size: 0.95rem;
     cursor: pointer;

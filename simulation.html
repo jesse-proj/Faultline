@@ -5,9 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulation | Poverty & Globalization</title>
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link rel="stylesheet" href="styles/global.css">
@@ -42,7 +39,7 @@
         .game-choices { display: flex; flex-direction: column; gap: 1rem; }
         .game-btn {
             background: #f9f9f9; border: 1px solid var(--border-color);
-            padding: 1.5rem; text-align: left; font-family: 'Poppins', sans-serif;
+            padding: 1.5rem; text-align: left; font-family: var(--font-text);
             cursor: pointer; transition: all 0.2s ease; border-radius: 2px;
             font-size: 1rem; line-height: 1.5; display: flex; justify-content: space-between; align-items: center;
         }
@@ -64,10 +61,10 @@
     <nav>
         <a href="index.html" class="logo">Rise Above Poverty</a>
         <ul class="nav-links">
-            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="interact.html"><i class="fas fa-gamepad"></i> Interact</a></li>
-            <li><a href="read.html"><i class="fas fa-book-open"></i> Read</a></li>
-            <li><a href="index.html#references"><i class="fas fa-quote-right"></i> References</a></li>
+            <li><a href="index.html"><i class="fas fa-globe"></i> Home</a></li>
+            <li><a href="interact.html" class="active-link"><i class="fas fa-map-location-dot"></i> Interact</a></li>
+            <li><a href="read.html"><i class="fas fa-newspaper"></i> Read</a></li>
+            <li><a href="#references"><i class="fas fa-file-lines"></i> References</a></li>
         </ul>
     </nav>
 
@@ -237,18 +234,15 @@
         let currentStep = 0;
 
         function initGame() {
-            // Get URL parameter (e.g., ?game=theYield)
             const urlParams = new URLSearchParams(window.location.search);
-            const gameId = urlParams.get('game') || 'supplyChain'; // Default fallback
+            const gameId = urlParams.get('game') || 'supplyChain'; 
             
             currentGame = gamesConfig[gameId];
             pStats = { ...currentGame.initialStats };
             currentStep = 0;
 
-            // Update UI Title
             document.getElementById('page-title').innerText = currentGame.title;
 
-            // Build Stat Bars Dynamically
             const statsContainer = document.getElementById('dynamic-stats');
             statsContainer.innerHTML = '';
             
@@ -267,12 +261,10 @@
         }
 
         function renderStoryNode() {
-            // Check Failure Conditions
             if (pStats.stat1 <= 0 || pStats.stat2 <= 0 || pStats.stat3 <= 0) {
                 return triggerGameOver();
             }
 
-            // Check Win Condition
             if (currentStep >= currentGame.nodes.length) {
                 return triggerEnding();
             }
@@ -299,16 +291,13 @@
         }
 
         function handleGameChoice(impact) {
-            // Update stats
             pStats.stat1 = Math.min(100, Math.max(0, pStats.stat1 + impact.stat1));
             pStats.stat2 = Math.min(100, Math.max(0, pStats.stat2 + impact.stat2));
             pStats.stat3 = Math.min(100, Math.max(0, pStats.stat3 + impact.stat3));
 
-            // Animate Bars
             currentGame.statKeys.forEach(stat => {
                 const bar = document.getElementById(`bar-${stat.id}`);
                 bar.style.width = pStats[stat.id] + '%';
-                // Turn red if danger zone (<25%)
                 bar.style.backgroundColor = pStats[stat.id] < 25 ? '#c45044' : stat.color;
             });
 
@@ -326,7 +315,6 @@
             document.getElementById('game-options').innerHTML = `<button class="btn-primary" style="justify-content:center; width: 200px; margin: 0 auto; background-color: ${currentGame.themeColor}; border: none;" onclick="window.location.href='interact.html'">Back to Interact</button>`;
         }
 
-        // Initialize on load
         document.addEventListener('DOMContentLoaded', initGame);
     </script>
 </body>

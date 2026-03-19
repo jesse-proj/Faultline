@@ -1,6 +1,6 @@
 /* components.css */
 h2 {
-    font-family: 'Kalam', cursive;
+    font-family: var(--font-header);
     font-size: 2.8rem;
     color: var(--text-dark);
     margin-bottom: 1rem;
@@ -14,23 +14,27 @@ h2 {
     font-size: 1.05rem;
 }
 
+/* --- THE NEW GHOST BUTTON --- */
 .btn-primary {
-    background-color: var(--accent-red);
-    color: var(--white);
+    background-color: transparent;
+    color: var(--text-dark);
     text-decoration: none;
     padding: 0.9rem 1.8rem;
+    border: 1px solid var(--text-dark);
     border-radius: 30px;
     font-weight: 600;
     font-size: 0.95rem;
     display: inline-flex;
     align-items: center;
     gap: 0.8rem;
-    transition: background 0.3s, transform 0.3s;
-    box-shadow: 0 4px 15px rgba(196, 80, 68, 0.3);
+    transition: background 0.3s, color 0.3s, transform 0.3s;
+    cursor: pointer;
+    outline: none;
 }
 
 .btn-primary:hover {
-    background-color: #a84239;
+    background-color: var(--text-dark);
+    color: var(--bg-color);
     transform: translateY(-2px);
 }
 
@@ -45,19 +49,17 @@ h2 {
 .card, .stat-box, .table-responsive {
     position: relative; 
     background: var(--white);
-    border-radius: 2px; /* Sharper edges to look like paper */
+    border-radius: 2px;
     border: 1px solid var(--border-color);
-    box-shadow: 3px 5px 15px rgba(0,0,0,0.05); /* Soft drop shadow */
+    box-shadow: 3px 5px 15px rgba(0,0,0,0.05);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* The Masking Tape */
 .card::after, .stat-box::after, .table-responsive::after {
     content: '';
     position: absolute;
     top: -12px; 
     left: 50%;
-    /* Keep the tape itself slightly crooked for realism */
     transform: translateX(-50%) rotate(-3deg);
     width: 90px;
     height: 30px;
@@ -67,7 +69,6 @@ h2 {
     transition: transform 0.3s ease;
 }
 
-/* Alternate the tape angles slightly for variety */
 .card:nth-child(even)::after {
     transform: translateX(-50%) rotate(2deg);
 }
@@ -77,14 +78,12 @@ h2 {
     padding: 2rem;
 }
 
-/* Subtler lift and tilt left on odd cards */
 .card:nth-child(odd):hover {
     transform: translateY(-4px) rotate(-0.5deg);
     box-shadow: 5px 10px 20px rgba(0,0,0,0.08);
     z-index: 5;
 }
 
-/* Subtler lift and tilt right on even cards */
 .card:nth-child(even):hover {
     transform: translateY(-4px) rotate(0.5deg);
     box-shadow: 5px 10px 20px rgba(0,0,0,0.08);
@@ -126,7 +125,7 @@ h2 {
 }
 
 .stat-box .number {
-    font-family: 'Kalam', cursive;
+    font-family: var(--font-header);
     font-size: 3.5rem;
     color: var(--accent-red);
     line-height: 1;
@@ -173,15 +172,12 @@ td { color: var(--text-light); font-size: 0.9rem; }
     .stat-box .number { font-size: 2.8rem; }
     .stat-box { padding: 2rem 1.5rem; }
     
-    /* Disable hover tilts on mobile */
     .card:nth-child(odd):hover, .card:nth-child(even):hover, .stat-box:hover, .table-responsive:hover {
         transform: translateY(-2px); 
     }
 }
 
-/* --- QUIZ & MODAL ADDITIONS (Restoring Interact Page Styles) --- */
-
-/* Modal Backdrop */
+/* --- QUIZ & MODAL ADDITIONS --- */
 .modal-overlay {
     display: none; 
     position: fixed;
@@ -194,7 +190,6 @@ td { color: var(--text-light); font-size: 0.9rem; }
     align-items: center;
 }
 
-/* Modal Paper Sheet */
 .modal-content {
     max-width: 550px;
     width: 90%;
@@ -206,7 +201,6 @@ td { color: var(--text-light); font-size: 0.9rem; }
     animation: modalPop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Modal Paper Tape */
 .modal-content::after {
     content: '';
     position: absolute;
@@ -231,7 +225,6 @@ td { color: var(--text-light); font-size: 0.9rem; }
     color: var(--text-light);
 }
 
-/* Quiz Option Buttons */
 .quiz-options {
     display: grid;
     gap: 0.8rem;
@@ -243,7 +236,6 @@ td { color: var(--text-light); font-size: 0.9rem; }
     border: 1px solid var(--border-color);
     padding: 1rem;
     text-align: left;
-    font-family: 'Poppins', sans-serif;
     cursor: pointer;
     transition: all 0.2s ease;
     display: flex;
@@ -272,30 +264,4 @@ td { color: var(--text-light); font-size: 0.9rem; }
     color: var(--accent-red);
     text-transform: uppercase;
     letter-spacing: 1px;
-}
-
-/* --- BUTTONS (Updated to Flat Style) --- */
-.btn-primary {
-    background-color: var(--accent-red);
-    color: var(--white);
-    text-decoration: none;
-    padding: 0.9rem 1.8rem;
-    border-radius: 30px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.8rem;
-    transition: background 0.3s, transform 0.3s;
-    box-shadow: 0 4px 15px rgba(196, 80, 68, 0.3);
-    /* Remove the default button border */
-    border: none; 
-    cursor: pointer;
-    /* Ensure no outline appears on click */
-    outline: none;
-}
-
-.btn-primary:hover {
-    background-color: #a84239;
-    transform: translateY(-2px);
 }

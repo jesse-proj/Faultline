@@ -1,11 +1,18 @@
 /* global.css */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Work+Sans:wght@400;500&display=swap');
+
 :root {
-    --bg-color: #f4f2ee;
-    --accent-red: #c45044;
-    --text-dark: #2a2a2a;
-    --text-light: #777777;
+    /* The Agrarian Colors */
+    --bg-color: #f7f6f0;
     --white: #ffffff;
-    --border-color: #e0deda;
+    --text-dark: #2c3625;
+    --text-light: #5f6e56;
+    --border-color: #dce0d5;
+    --accent-red: #a83f2a;
+
+    /* Typography */
+    --font-header: 'Crimson Text', serif;
+    --font-text: 'Work Sans', sans-serif;
 }
 
 * {
@@ -15,11 +22,21 @@
 }
 
 body, html {
-    font-family: 'Poppins', sans-serif;
+    font-family: var(--font-text);
     font-size: 14px;
     background-color: var(--bg-color);
     color: var(--text-dark);
     scroll-behavior: smooth;
+}
+
+/* --- HIDE SCROLLBAR --- */
+::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}
+
+body {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 .bg-grid {
@@ -49,17 +66,15 @@ section { margin-bottom: 5rem; }
 
 .reveal {
     opacity: 0;
-    transform: translateY(30px) scale(0.98); /* Less distance to travel = faster feel */
-    transition: all 0.4s ease-in; /* Faster exit when scrolling away */
-    will-change: transform, opacity; /* Optimizes browser performance */
+    transform: translateY(30px) scale(0.98); 
+    transition: all 0.4s ease-in; 
+    will-change: transform, opacity; 
 }
 
 .reveal.active {
     opacity: 1;
     transform: translateY(0) scale(1);
-    /* This cubic-bezier gives it a snappy, high-end "pop" */
     transition: 
         opacity 0.4s ease-out, 
         transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.1);
 }
-
