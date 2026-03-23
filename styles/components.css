@@ -139,6 +139,7 @@ th {
 }
 
 td { color: var(--text-light); font-size: 0.9rem; }
+td i { color: var(--accent-red); margin-right: 8px; width: 22px; text-align: center; }
 
 @media (max-width: 768px) {
     .grid-2 { grid-template-columns: 1fr; }
@@ -266,7 +267,7 @@ td { color: var(--text-light); font-size: 0.9rem; }
     font-family: var(--font-header);
     font-size: 2.4rem;
     font-style: normal;
-    color: var(--accent-red);
+    color: var(--text-dark);
     margin-bottom: 1.6rem;
     text-align: center;
 }
@@ -572,4 +573,98 @@ mark.highlight {
 }
 .fishbone-bottom .clickable-cause:hover {
     transform: translate(-50%, 5px) rotate(35deg) scale(1.05);
+}
+
+/* --- LEARN MORE PREVIEW SECTION --- */
+.learn-more-section {
+    padding-top: 4rem;
+    padding-bottom: 6rem;
+}
+
+.learn-more-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    margin-bottom: 4rem;
+}
+
+.preview-card {
+    background-color: #fff;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 2.5rem;
+    transition: all 0.3s cubic-bezier(0.1, 0.7, 0.1, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+[id] {
+    scroll-margin-top: 200px;
+}
+
+.preview-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 100%;
+}
+
+.preview-card.sim-preview::before { background-color: #5e35b1; }
+.preview-card.quiz-preview::before { background-color: var(--accent-red); }
+
+.preview-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    border-color: rgba(0,0,0,0.15);
+}
+
+.preview-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.preview-card.sim-preview .preview-icon { color: #5e35b1; }
+.preview-card.quiz-preview .preview-icon { color: var(--accent-red); }
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: auto;
+}
+
+.tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: #f0f0f0;
+    color: #555;
+}
+
+.cta-footer {
+    text-align: center;
+}
+
+.btn-large {
+    padding: 1.2rem 3rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .preview-grid { grid-template-columns: 1fr; }
 }
