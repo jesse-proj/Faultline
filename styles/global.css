@@ -2,13 +2,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Work+Sans:wght@400;500&display=swap');
 
 :root {
-    /* The Agrarian Colors */
-    --bg-color: #f7f6f0;
-    --white: #ffffff;
-    --text-dark: #2c3625;
-    --text-light: #5f6e56;
-    --border-color: #dce0d5;
-    --accent-red: #a83f2a;
+    /* Cream & Green */
+    --bg-color: #f9f6f0; /* Warm cream background */
+    --white: #ffffff; /* Crisp white for the content cards */
+    --text-dark: #1b2e22; /* Very dark forest green for high readability */
+    --text-light: #597060; /* Muted sage for secondary text and subtitles */
+    --border-color: #d8e2db; /* Soft greenish-gray for borders and lines */
+    --accent-red: #2a7242; /* Rich emerald green for buttons, icons, and links */
 
     /* Typography */
     --font-header: 'Crimson Text', serif;
@@ -31,14 +31,15 @@ body, html {
 
 /* --- HIDE SCROLLBAR --- */
 ::-webkit-scrollbar {
-    display: none; /* Chrome, Safari and Opera */
+    display: none; 
 }
 
 body {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
 }
 
+/* --- THE ORIGINAL FAINT BACKGROUND GRID --- */
 .bg-grid {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -78,3 +79,4 @@ section { margin-bottom: 5rem; }
         opacity 0.4s ease-out, 
         transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.1);
 }
+

@@ -45,7 +45,7 @@ header.hero {
 }
 
 .hero p.subtitle {
-    font-size: 1.25rem; /* Bumped up from 1.1rem */
+    font-size: 1.25rem; 
     color: var(--text-light);
     margin-bottom: 2.5rem;
     position: relative; 
@@ -117,5 +117,5 @@ header.hero {
 
 @media (max-width: 768px) {
     .hero h1 { font-size: 3.5rem; } 
-    .hero p.subtitle { font-size: 1.1rem; } /* Bumped up slightly for mobile */
+    .hero p.subtitle { font-size: 1.1rem; } 
 }
