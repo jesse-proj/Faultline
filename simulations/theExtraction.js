@@ -23,6 +23,7 @@ const theExtractionConfig = {
         "stat2": 80,
         "stat3": 75
     },
+    "gameOverText": "System Collapse. Your body finally gave out under the immense weight of the pit. You are carried out of the mine by other workers, but there is no company doctor, no compensation, and no insurance. You lie in the dirt outside the camp fence as the sound of pickaxes carries on without interruption. The global price of cobalt does not move by a single cent.",
     "nodes": {
         "1": {
             "image": "images/te_deep_vein.png",

@@ -1,6 +1,6 @@
 const supplyChainConfig = {
     "title": "The Supply Chain",
-    "themeColor": "var(--accent-red)",
+    "themeColor": "#2a7242",
     "statKeys": [
         {
             "id": "stat1",
@@ -23,6 +23,7 @@ const supplyChainConfig = {
         "stat2": 60,
         "stat3": 80
     },
+    "gameOverText": "Without a social safety net, your body has given out entirely. You collapse on the factory floor and are dragged off the line. Management replaces you within the hour. You return to your boarding house with nothing—no severance, no savings, and a family waiting on a remittance that will never come.",
     "nodes": {
         "1": {
             "image": "images/sc_factory_floor.png",

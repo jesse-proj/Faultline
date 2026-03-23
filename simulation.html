@@ -319,7 +319,15 @@
 
         function triggerGameOver() {
             playSound('lose');
-            document.getElementById('game-narrative').innerHTML = `<strong style="color: #c45044; font-size: 1.5rem;">CRITICAL FAILURE</strong><p>System Collapse: You have run out of resources completely. You are forced onto the streets. The colonial legacy simply changed its name.</p>`;
+
+            // Clear the image and stat bars
+            const imgContainer = document.getElementById('scenario-image-container');
+            imgContainer.innerHTML = '';
+            imgContainer.style.display = 'none';
+            document.getElementById('dynamic-stats').style.display = 'none';
+
+            const overText = (currentGame && currentGame.gameOverText) ? currentGame.gameOverText : 'You have run out of resources.';
+            document.getElementById('game-narrative').innerHTML = `<strong style="color: #c45044; font-size: 1.6rem; display: block; margin-bottom: 1rem;">CRITICAL FAILURE</strong><p style="font-size: 1.1rem; line-height: 1.9;">${overText}</p>`;
             document.getElementById('game-options').innerHTML = `<button class="btn-primary" style="justify-content:center; width: 200px; margin: 0 auto; background-color: ${currentGame.themeColor}; border: none; color: white;" onclick="window.location.reload()">Restart Simulation</button>`;
         }
 

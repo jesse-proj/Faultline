@@ -23,6 +23,7 @@ const theYieldConfig = {
         "stat2": 50,
         "stat3": 70
     },
+    "gameOverText": "Foreclosure. Your fields have completely failed, your funds are gone, and your household is starving. The bank seizes your ancestral land at auction. A foreign agribusiness buys it for a fraction of its real value. You load your family onto a truck headed for the capital, leaving behind the soil your grandparents farmed. The land will now grow cotton for export.",
     "nodes": {
         "1": {
             "image": "images/ty_drought.png",
