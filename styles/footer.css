@@ -2,22 +2,127 @@
 footer {
     background-color: var(--text-dark);
     border-top: none;
-    padding: 3rem 2rem;
-    text-align: center;
+    padding: 4rem 2rem;
     color: rgba(255, 255, 255, 0.7);
-    font-size: 0.85rem;
+    font-size: 1rem;
+    font-family: var(--font-text);
 }
 
-footer .footer-logo {
+.footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem;
+}
+
+/* Left Column */
+.footer-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-col p {
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.footer-logo {
     font-family: var(--font-header);
-    font-size: 1.5rem;
-    color: var(--white);
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.5);
     margin-bottom: 1rem;
     display: inline-block;
+    font-style: normal;
+    font-weight: 700;
 }
 
-footer a {
-    color: var(--white);
+.footer-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    border: 1px solid var(--accent-red);
+    color: var(--accent-red);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    width: fit-content;
+    text-transform: uppercase;
+}
+
+/* Middle Column */
+.nav-col h4,
+.team-col h4 {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+}
+
+.nav-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.nav-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-col li {
+    margin-bottom: 1rem;
+}
+
+.nav-col a {
+    color: rgba(255, 255, 255, 0.8);
     text-decoration: none;
     font-weight: 500;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: color 0.3s ease;
+}
+
+.nav-col a:hover {
+    color: var(--white);
+}
+
+.nav-col i {
+    color: rgba(255, 255, 255, 0.5);
+    width: 16px;
+    text-align: center;
+}
+
+/* Right Column */
+.team-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+}
+
+.team-pills .pill {
+    padding: 0.4rem 1rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.8rem;
+}
+
+.school-text {
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
 }

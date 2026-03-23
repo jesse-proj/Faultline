@@ -16,4 +16,19 @@ function closeArticle() {
     document.getElementById('preview-grid').style.display = 'grid';
     document.getElementById('page-header').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // Clear the URL parameter when closing
+    const newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+    window.history.pushState({path:newUrl},'',newUrl);
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const articleId = urlParams.get('article');
+    if (articleId && document.getElementById(articleId)) {
+        // slight delay to let other DOM elements render (if needed by animations)
+        setTimeout(() => {
+            openArticle(articleId);
+        }, 100);
+    }
+});

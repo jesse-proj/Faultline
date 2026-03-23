@@ -6,7 +6,6 @@
     <title>Faultline - Poverty & Globalization</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 
     <link rel="stylesheet" href="styles/global.css">
@@ -14,11 +13,11 @@
     <link rel="stylesheet" href="styles/hero.css">
     <link rel="stylesheet" href="styles/components.css">
     <link rel="stylesheet" href="styles/footer.css">
-
     <link rel="stylesheet" href="styles/poverty-map.css">
+    <link rel="stylesheet" href="styles/quiz.css">
+    <link rel="stylesheet" href="styles/article.css">
 </head>
 <body>
-
     <div class="bg-grid"></div>
 
     <nav>
@@ -38,62 +37,17 @@
             <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1518398046578-8cca57782e17?q=80&w=2070&auto=format&fit=crop');"></div>
         </div>
 
-        <p class="overtitle"><i class="fas fa-bookmark"></i> SOCIOECONOMIC DATA — DIGITAL PROJECT</p>
+        <p class="overtitle"><i class="fas fa-globe"></i> DIGITAL PROJECT — THE ISSUE OF</p>
         <h1>Poverty &<br>Globalization</h1>
         <p class="subtitle">An interactive exploration of economic disparity, colonial roots, and paths to progress across the globe.</p>
         <a href="#content" class="btn-primary"><i class="fas fa-arrow-down"></i> Explore the Issues</a>
     </header>
 
     <div class="container" id="content">
-        
+        <!-- The Issue -->
         <div class="reveal">
             <section class="paper-sheet">
-                <h2>The Weight of Inequality</h2>
-                <p class="section-desc">The effects of colonialism continue to echo today. The economic disparity between the Global North and South is driven by historical resource extraction and labor exploitation.</p>
-                
-                <div class="grid-2">
-                    <div class="card">
-                        <h3>The Wealth Drain</h3>
-                        <img src="https://www.children.org/globalassets/01_global-poverty/fy20_povertyfacts_zambia.jpg" class="card-img">
-                        <p>The richest 1% owns nearly half the world's wealth. The current system extracts wealth from the Global South to the Global North at an astonishing rate of <strong>$30 million an hour</strong>.</p>
-                        <ul>
-                            <li>In 2024, billionaire wealth increased by $2 trillion.</li>
-                            <li>An average of four new billionaires are created per week.</li>
-                            <li>60% of billionaire wealth is unearned (inheritance, cronyism).</li>
-                        </ul>
-                    </div>
-                    <div class="card">
-                        <h3>The Colonial Root</h3>
-                        <img src="https://www.children.org/globalassets/01_global-poverty/fy20_povertyfacts_zambia.jpg" class="card-img">
-                        <p>The World Bank notes that 26 of the world's poorest countries are primarily in Africa. Experts cite colonialism as a core factor stunting growth.</p>
-                        <ul>
-                            <li>Historical losses of human capital stunt modern GDP.</li>
-                            <li>Poverty in Africa is multi-dimensional (climate risks, colonial legacies, poor health systems).</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <div class="reveal">
-            <section class="paper-sheet">
-                <h2>Global Telemetry</h2>
-                <p class="section-desc">An interactive geographic visualization tracking the percentage of populations living below the national poverty line. <strong>Click, drag, and scroll to zoom.</strong></p>
-                
-                <div class="map-wrapper">
-                    <div id="global-heatmap"></div>
-                </div>
-
-                <div class="map-notes">
-                    <span><strong>Source:</strong> Consolidated Global Economic Reports (2024-2025)</span>
-                    <span><strong>Scale:</strong> % of Total Population</span>
-                </div>
-            </section>
-        </div>
-
-        <div class="reveal">
-            <section class="paper-sheet">
-                <h2>Deconstructing Poverty</h2>
+                <h2>The Issue</h2>
                 <p class="section-desc">According to the Singapore University of Technology and Design (SUTD), poverty is not a single experience. It exists in four distinct types.</p>
                 
                 <div class="grid-2">
@@ -112,67 +66,425 @@
                 <div class="table-responsive">
                     <table>
                         <tr>
-                            <th>Multi-dimensional Deprivation</th>
-                            <th>Impact & Manifestation</th>
+                            <th style="width: 40%;">Multi-dimensional Deprivation</th>
+                            <th style="width: 60%;">Impact & Manifestation</th>
                         </tr>
-                        <tr>
-                            <td><strong>Adequate Housing</strong></td>
-                            <td>Absence of safe, habitable shelter. Key issues: affordability and security.</td>
+                        <tr class="clickable-row" onclick="openFishbone('housing')">
+                            <td><strong>Inadequate Housing</strong></td>
+                            <td>Intense climate change events frequently wipe out vulnerable settlements, leaving poor communities trapped in substandard housing without the resources to rebuild safely.</td>
                         </tr>
-                        <tr>
-                            <td><strong>Good Health</strong></td>
-                            <td>Driven by food insecurity (lack of nutrition, not just hunger) and inadequate mental healthcare.</td>
+                        <tr class="clickable-row" onclick="openFishbone('health')">
+                            <td><strong>Bad Health</strong></td>
+                            <td>Labor exploitation and aggressive raw resource extraction severely pollute local environments and expose workers to physical hazards without adequate protective gear or healthcare.</td>
                         </tr>
-                        <tr>
-                            <td><strong>Adequate Education</strong></td>
-                            <td>Systemic inequity where lower-income families cannot access quality primary education.</td>
+                        <tr class="clickable-row" onclick="openFishbone('education')">
+                            <td><strong>Lacking Education</strong></td>
+                            <td>Globalized industries extract wealth and rely on cheap manual labor, forcing children into work instead of school while local education systems remain chronically underfunded.</td>
                         </tr>
-                        <tr>
-                            <td><strong>Social Exclusion</strong></td>
-                            <td>Stigma and isolation preventing upward social and economic mobility.</td>
-                        </tr>
+
                     </table>
                 </div>
             </section>
         </div>
 
+        <!-- Articles -->
         <div class="reveal">
             <section class="paper-sheet">
-                <h2>Paths to Progress</h2>
-                <p class="section-desc">Despite the harsh realities, targeted government interventions, economic growth, and global philanthropy are actively lifting millions out of poverty.</p>
+                <h2>Articles</h2>
+                <p class="section-desc">In-depth investigative reports on the historical and modern drivers of economic disparity.</p>
                 
                 <div class="grid-2">
-                    <div class="card">
-                        <h3>Success in the Philippines</h3>
-                        <img src="https://images.unsplash.com/photo-1542614917-88d3e2bb97f5?q=80&w=2070&auto=format&fit=crop" alt="Rural agricultural life" class="card-img">
-                        <p>Self-rated poverty dropped from 54% to 37% by the end of 2025. This means <strong>4.5 million families</strong> no longer see themselves as poor.</p>
-                        <ul>
-                            <li>Food poverty declined from 49% to 19%.</li>
-                            <li>Driven by 5.5% economic growth.</li>
-                            <li>Supported by cash transfers and targeted fuel subsidies for drivers and farmers.</li>
-                        </ul>
+                    <div class="card preview-card">
+                        <img src="images/resource_extraction_banner.png" class="card-img" alt="Resource Extraction">
+                        <h3>The Trap of Raw Resource Extraction</h3>
+                        <p class="preview-text" style="margin-top: 1rem;">Nickel is a highly valued element as it is highly versatile. It has been used in energy storage technologies for years, enabling portable electronic devices...</p>
+                        <a href="read.html?article=resource-extraction" class="btn-primary" style="margin-top: 1.5rem; display: inline-block;">Read Report</a>
                     </div>
-                    <div class="card">
-                        <h3>Global Philanthropy</h3>
-                        <img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=2070&auto=format&fit=crop" alt="Community support" class="card-img">
-                        <p>The United States leads in financial philanthropy, contributing $49 billion annually (0.23% of GNI).</p>
-                        <p style="margin-top: 1rem;">However, when factoring in volunteering and helping strangers, the 2023 World Giving Index highlights <strong>Indonesia, Ukraine, Kenya, and Liberia</strong> as top-ranking nations.</p>
+                    <div class="card preview-card">
+                        <img src="images/labor_exploitation_banner.png" class="card-img" alt="Labor Exploitation">
+                        <h3>Labor Exploitation and Wealth Gap</h3>
+                        <p class="preview-text" style="margin-top: 1rem;">Globalization has allowed the globe to connect in many different aspects of life. With such a positive description, it is unfortunate that the concept has brought forth cases of exploitation...</p>
+                        <a href="read.html?article=labor-exploitation" class="btn-primary" style="margin-top: 1.5rem; display: inline-block;">Read Report</a>
+                    </div>
+                    <div class="card preview-card">
+                        <img src="images/climate_crisis_banner.png" class="card-img" alt="Environment Crisis">
+                        <h3>The Global Environment Crisis and Poverty</h3>
+                        <p class="preview-text" style="margin-top: 1rem;">Developing nations face a continuous cycle of disaster recovery, severely stunting long-term economic growth as extreme weather events cause widespread losses...</p>
+                        <a href="read.html?article=environment-crisis" class="btn-primary" style="margin-top: 1.5rem; display: inline-block;">Read Report</a>
+                    </div>
+                    <div class="card preview-card">
+                        <img src="images/breaking_cycle_banner.png" class="card-img" alt="Breaking the Cycle">
+                        <h3>Breaking the Cycle</h3>
+                        <p class="preview-text" style="margin-top: 1rem;">In today’s global economy, many developing countries face problems that keep them stuck in poverty. Ordinary citizens can still make a real difference through their everyday choices...</p>
+                        <a href="read.html?article=breaking-cycle" class="btn-primary" style="margin-top: 1.5rem; display: inline-block;">Read Report</a>
                     </div>
                 </div>
             </section>
         </div>
 
+        <!-- Poverty Heatmap -->
+        <div class="reveal">
+            <section class="paper-sheet">
+                <h2>Poverty Heatmap</h2>
+                <p class="section-desc">An interactive geographic visualization tracking the percentage of populations living below the national poverty line. <strong>Click, drag, and scroll to zoom.</strong></p>
+                
+                <div class="map-wrapper">
+                    <div id="global-heatmap"></div>
+                </div>
+
+                <div class="map-notes">
+                    <span><strong>Source:</strong> World Bank Global Poverty Working Group (Latest Available Year)</span>
+                    <span><strong>Scale:</strong> % of Total Population</span>
+                </div>
+            </section>
+        </div>
+
+        <!-- Our Stand -->
+        <div class="reveal">
+            <section class="our-stand-note">
+                <!-- Tape corners -->
+                <div class="tape tape-tl"></div>
+                <div class="tape tape-tr"></div>
+                <div class="tape tape-bl"></div>
+                <div class="tape tape-br"></div>
+
+                <!-- Title -->
+                <h2 class="stand-title">Our Stand</h2>
+
+                <!-- Body text -->
+                <p class="stand-body">
+                    Poverty is not a single experience — it is <mark class="highlight">absolute deprivation,
+                    generational entrapment, and systemic exclusion</mark> all at once.
+                    Millions are denied adequate housing, nutrition, healthcare, and education
+                    not by choice, but by circumstance. We believe that
+                    <mark class="highlight">no one should starve because they cannot afford food</mark>,
+                    and no one should have to sacrifice their wellbeing just to barely survive.
+                    Social stigma and inequality only deepen these cycles, making escape
+                    nearly impossible without collective action. We stand for a world where
+                    every person's basic needs are met — and where poverty is treated as the
+                    solvable injustice it truly is.
+                </p>
+            </section>
+        </div>
+
+        <!-- Call to action -->
+        <div class="reveal">
+            <section class="paper-sheet" style="padding: 4rem 2rem 2rem; ">
+                <h2>Call to Action</h2>
+                <p class="section-desc">How ordinary citizens can actively help break the cycles of global poverty and exploitation.</p>
+                
+                <div style="display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; margin-top: 3rem;">
+                    <!-- Action Box 1: Resource Extraction -->
+                    <div class="card" style="flex: 1; min-width: 280px; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                        <div style="font-size: 3.5rem; margin-bottom: 1rem;">🛍️</div>
+                        <h3 style="color: var(--text-dark); font-size: 1.4rem; margin-bottom: 1rem;">Support Local Industry</h3>
+                        <p style="color: var(--text-light); line-height: 1.6;">
+                            Break the trap of raw resource extraction by buying locally manufactured goods. 
+                            This everyday choice strengthens domestic industries, generates local jobs, and reduces 
+                            national dependence on low-value raw material exports.
+                        </p>
+                    </div>
+
+                    <!-- Action Box 2: Labor Exploitation -->
+                    <div class="card" style="flex: 1; min-width: 280px; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                        <div style="font-size: 3.5rem; margin-bottom: 1rem;">🤝</div>
+                        <h3 style="color: var(--text-dark); font-size: 1.4rem; margin-bottom: 1rem;">Ethical Consumption</h3>
+                        <p style="color: var(--text-light); line-height: 1.6;">
+                            Fight labor exploitation by choosing goods from companies that prioritize fair wages and safe working conditions. 
+                            Demand supply chain transparency and support collective bargaining rights to ensure worker dignity.
+                        </p>
+                    </div>
+
+                    <!-- Action Box 3: Climate Poverty -->
+                    <div class="card" style="flex: 1; min-width: 280px; text-align: center; display: flex; flex-direction: column; align-items: center;">
+                        <div style="font-size: 3.5rem; margin-bottom: 1rem;">🌱</div>
+                        <h3 style="color: var(--text-dark); font-size: 1.4rem; margin-bottom: 1rem;">Community Climate Action</h3>
+                        <p style="color: var(--text-light); line-height: 1.6;">
+                            Protect vulnerable communities from climate-induced poverty by participating in local environmental sustainability efforts. 
+                            Grassroots resilience—like creating green spaces and advocating clean energy—defends against devastating climate risks.
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
 
     <footer id="references">
-        <span class="footer-logo">Faultline</span>
-        <p>A digital project exploring socioeconomic data, human rights, and the duality of globalization.</p>
-        <p>Data compiled from OCTA Research, Borgen Project, UNICEF, Statista, SUTD, TRTWorld, Human Act, and Oxfam.</p>
-        <p style="margin-top: 1rem; font-size: 0.75rem;">&copy; All Rights Reserved by <strong>Faultline</strong></p>
+        <div class="footer-container">
+            <div class="footer-col brand-col">
+                <span class="footer-logo">Faultline</span>
+                <p>An interactive exploration of injustice across the globe — built to turn awareness into advocacy.</p>
+                <div class="footer-badge">CONTEM_W - 2ITE</div>
+            </div>
+            
+            <div class="footer-col nav-col">
+                <h4>NAVIGATE</h4>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="interact.html"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="#references"><i class="fas fa-bookmark"></i> References</a></li>
+                    <li><a href="#"><i class="fab fa-github"></i> GitHub</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col team-col">
+                <h4>THE TEAM</h4>
+                <div class="team-pills">
+                    <span class="pill">Omori</span>
+                    <span class="pill">Gamalong</span>
+                    <span class="pill">Santiago</span>
+                    <span class="pill">Reforma</span>
+                    <span class="pill">Dane</span>
+                </div>
+                <p class="school-text">
+                    University of Santo Tomas<br>
+                    College of Information and Computing Sciences
+                </p>
+            </div>
+        </div>
     </footer>
+
+    <!-- Fishbone Modal -->
+    <div class="fishbone-modal" id="fishboneModal">
+        <div class="fishbone-content">
+            <span class="close-btn" onclick="closeFishbone()">&times;</span>
+            <h2 id="fishboneTitle" style="text-align:center; color: var(--accent-red); margin-top: 1rem; margin-bottom: 2rem;"></h2>
+            
+            <div class="fishbone-chart">
+                <div class="fishbone-spine"></div>
+                
+                <div class="fishbone-top">
+                    <div class="rib"><div class="cause-box clickable-cause" onclick="openCausePanel(0)" id="cause1"></div></div>
+                    <div class="rib"><div class="cause-box clickable-cause" onclick="openCausePanel(1)" id="cause2"></div></div>
+                </div>
+                
+                <div class="fishbone-bottom">
+                    <div class="rib"><div class="cause-box clickable-cause" onclick="openCausePanel(2)" id="cause3"></div></div>
+                    <div class="rib"><div class="cause-box clickable-cause" onclick="openCausePanel(3)" id="cause4"></div></div>
+                </div>
+                
+                <div class="fishbone-head" id="fishboneEffect"></div>
+            </div>
+            
+            <p id="fishboneDesc" style="text-align:center; margin-top:3rem; font-style:italic; color:var(--text-light); line-height: 1.6;"></p>
+
+            <!-- Cause Side Panel -->
+            <div class="fishbone-side-panel" id="causePanel">
+                <span class="panel-close" onclick="closeCausePanel()">&times;</span>
+                <h3 class="panel-title" id="panelTitle"></h3>
+                <p class="panel-desc" id="panelDesc"></p>
+                <div id="panelChart" style="width: 100%; height: 250px; margin: 1rem 0;"></div>
+                <div class="panel-stat" id="panelStat"></div>
+                <p class="panel-source" id="panelSource"></p>
+            </div>
+        </div>
+    </div>
 
     <script src="scripts/navbar.js"></script>
     <script src="scripts/reveal.js"></script>
     <script src="scripts/poverty-map.js"></script>
+    <script>
+        let currentFishboneId = null;
+
+        const fishboneData = {
+            housing: {
+                title: 'Deprivation Analysis: Inadequate Housing',
+                effect: 'Inadequate Housing',
+                desc: 'Intense climate change events frequently wipe out vulnerable settlements, leaving poor communities trapped in substandard housing without the resources to rebuild safely.',
+                causes: [
+                    {
+                        title: 'Climate Events (Floods)',
+                        desc: 'Developing nations face a continuous cycle of disaster recovery. Extreme weather events destroy regional infrastructure and housing, forcing communities to constantly rebuild.',
+                        stat: 'In 2022, weather-related disasters displaced 31.8 million people globally, mostly in developing regions.',
+                        source: 'Internal Displacement Monitoring Centre (IDMC), 2023 Global Report',
+                        chart: { labels: ['2019', '2020', '2021', '2022'], values: [24.9, 30.7, 23.7, 31.8], type: 'bar', yAxis: 'People Displaced (Millions)' }
+                    },
+                    {
+                        title: 'Coastal Settlements',
+                        desc: 'Impoverished communities are often pushed to the margins of cities, settling in low-lying coastal areas that are highly vulnerable to sea-level rise and storm surges.',
+                        stat: 'Over 1.1 billion people live in slums or informal settlements, often located in environmentally hazardous zones.',
+                        source: 'UN-Habitat, World Cities Report 2022',
+                        chart: { labels: ['2000', '2010', '2018', '2022'], values: [0.8, 0.95, 1.03, 1.10], type: 'scatter', yAxis: 'Slum Population (Billions)' }
+                    },
+                    {
+                        title: 'Lack of Safe Resources',
+                        desc: 'Due to low wages and systemic poverty, families cannot afford resilient building materials like concrete or steel, relying instead on scrap wood and corrugated metal.',
+                        stat: 'Up to 70% of the urban population in some developing nations live in housing made of non-durable materials.',
+                        source: 'World Bank Institute, Urban Development Data',
+                        chart: { labels: ['Non-Durable (70%)', 'Durable (30%)'], values: [70, 30], type: 'pie' }
+                    },
+                    {
+                        title: 'Substandard Urban Planning',
+                        desc: 'Rapid urbanization without adequate government regulation or infrastructure investment leads to sprawling slums lacking protective seawalls or drainage systems.',
+                        stat: 'By 2030, an estimated 3 billion people will require adequate and affordable housing globally.',
+                        source: 'United Nations Human Settlements Programme',
+                        chart: { labels: ['2015', '2020', '2025 (est)', '2030 (est)'], values: [1.2, 1.8, 2.4, 3.0], type: 'bar', yAxis: 'People in Need (Billions)' }
+                    }
+                ]
+            },
+            health: {
+                title: 'Deprivation Analysis: Bad Health',
+                effect: 'Bad Health',
+                desc: 'Labor exploitation and aggressive raw resource extraction severely pollute local environments and expose workers to physical hazards without adequate protective gear or healthcare.',
+                causes: [
+                    {
+                        title: 'Toxic Factory Hazards',
+                        desc: 'Workers in garment and electronics factories are often exposed to toxic chemicals and airborne particulates without proper ventilation or protective equipment.',
+                        stat: 'An estimated 2.78 million workers die every year from occupational accidents and work-related diseases globally.',
+                        source: 'International Labour Organization (ILO)',
+                        chart: { labels: ['2015', '2017', '2019', '2022'], values: [2.35, 2.50, 2.72, 2.78], type: 'scatter', yAxis: 'Deaths (Millions)' }
+                    },
+                    {
+                        title: 'Exploitative Labor',
+                        desc: 'Forced overtime and gruelling physical labor without adequate breaks lead to chronic exhaustion, malnutrition, and a weakened immune system among workers.',
+                        stat: 'Over 400 million workers worldwide lack access to basic occupational health services.',
+                        source: 'World Health Organization (WHO), 2023',
+                        chart: { labels: ['Lack Access (400M)', 'Have Access'], values: [400, 600], type: 'pie' }
+                    },
+                    {
+                        title: 'Aggressive Raw Extraction',
+                        desc: 'Mining operations often disregard environmental regulations, leading to heavy metal contamination of the surrounding soil and groundwater used by local communities.',
+                        stat: 'Mining and resource extraction cause approximately 60% of all severe toxic pollution sites in low-to-middle income countries.',
+                        source: 'Pure Earth / Green Cross Switzerland',
+                        chart: { labels: ['Mining/Extraction (60%)', 'Other Industries (40%)'], values: [60, 40], type: 'pie' }
+                    },
+                    {
+                        title: 'Polluted Water & Air',
+                        desc: 'Industrial runoff from globalized manufacturing hubs poisons local agriculture and drinking water, causing widespread gastrointestinal and respiratory illnesses.',
+                        stat: 'Contaminated drinking water is estimated to cause 505,000 diarrheal deaths each year.',
+                        source: 'World Health Organization (WHO)',
+                        chart: { labels: ['2015', '2018', '2021', '2024'], values: [550, 530, 515, 505], type: 'bar', yAxis: 'Deaths (Thousands)' }
+                    }
+                ]
+            },
+            education: {
+                title: 'Deprivation Analysis: Lacking Education',
+                effect: 'Lacking Education',
+                desc: 'Globalized industries extract wealth and rely on cheap manual labor, forcing children into work instead of school while local education systems remain chronically underfunded.',
+                causes: [
+                    {
+                        title: 'Systemic Wealth Extraction',
+                        desc: 'As multinational corporations extract wealth and raw resources, potential tax revenue is lost. This leaves the host nation without enough sovereign funds to build schools.',
+                        stat: 'Developing countries lose roughly $1 trillion annually to illicit financial flows, severely crippling public sector budgets.',
+                        source: 'Global Financial Integrity (GFI) Report',
+                        chart: { labels: ['2010', '2015', '2020', '2024'], values: [0.45, 0.72, 0.95, 1.05], type: 'scatter', yAxis: 'Trillions ($USD) Lost' }
+                    },
+                    {
+                        title: 'Reliance on Cheap Labor',
+                        desc: 'The global market explicitly demands cheap labor, incentivizing developing nations to suppress wages. This traps families in poverty, making school fees unaffordable.',
+                        stat: 'In low-income countries, the average minimum wage falls 30% below the threshold required to afford basic family needs including education.',
+                        source: 'World Bank, Poverty and Equity Briefs',
+                        chart: { labels: ['Living Wage Needed', 'Actual Avg Minimum Wage'], values: [100, 70], type: 'bar', yAxis: 'Purchasing Power %' }
+                    },
+                    {
+                        title: 'Forced Child Labor',
+                        desc: 'To supplement meager household incomes, children are pulled out of primary education to work in agriculture, mining, or informal urban sectors.',
+                        stat: 'There are 160 million children in child labor globally, with nearly half (79m) engaged in hazardous work that directly prevents schooling.',
+                        source: 'UNICEF / ILO Child Labour Global Estimates',
+                        chart: { labels: ['Hazardous Work (79m)', 'Other Child Labor (81m)'], values: [79, 81], type: 'pie' }
+                    },
+                    {
+                        title: 'Underfunded Schools',
+                        desc: 'With debt repayments and foreign extraction dominating the economy, public education infrastructure collapses, resulting in severe teacher shortages and lack of materials.',
+                        stat: 'Low-income countries face an annual funding gap of $39 billion to achieve quality universal school education.',
+                        source: 'UNESCO Global Education Monitoring Report',
+                        chart: { labels: ['2015', '2018', '2021', '2024'], values: [25, 32, 36, 39], type: 'scatter', yAxis: 'Funding Gap (Billions $USD)' }
+                    }
+                ]
+            }
+        };
+
+        function openFishbone(id) {
+            currentFishboneId = id;
+            const data = fishboneData[id];
+            document.getElementById('fishboneTitle').innerText = data.title;
+            document.getElementById('fishboneEffect').innerText = data.effect;
+            document.getElementById('cause1').innerText = data.causes[0].title;
+            document.getElementById('cause2').innerText = data.causes[1].title;
+            document.getElementById('cause3').innerText = data.causes[2].title;
+            document.getElementById('cause4').innerText = data.causes[3].title;
+            document.getElementById('fishboneDesc').innerText = data.desc;
+            document.getElementById('fishboneModal').style.display = 'block';
+            closeCausePanel(); 
+        }
+
+        function closeFishbone() {
+            document.getElementById('fishboneModal').style.display = 'none';
+            closeCausePanel();
+        }
+
+        function openCausePanel(index) {
+            if (!currentFishboneId) return;
+            const causeData = fishboneData[currentFishboneId].causes[index];
+            document.getElementById('panelTitle').innerText = causeData.title;
+            document.getElementById('panelDesc').innerText = causeData.desc;
+            document.getElementById('panelStat').innerText = causeData.stat;
+            document.getElementById('panelSource').innerText = 'Source: ' + causeData.source;
+            document.getElementById('causePanel').classList.add('open');
+
+            renderSideChart(causeData.chart);
+        }
+
+        function renderSideChart(chartData) {
+            let trace;
+            const layout = {
+                margin: { l: 45, r: 15, t: 25, b: 40 },
+                font: { size: 10, family: 'Outfit, sans-serif' },
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                plot_bgcolor: 'rgba(0,0,0,0)',
+                showlegend: chartData.type === 'pie',
+                yaxis: { title: chartData.yAxis || '', titlefont: { size: 10 }, tickfont: { size: 10 } },
+                xaxis: { tickfont: { size: 10 } }
+            };
+
+            if (chartData.type === 'pie') {
+                layout.showlegend = false; // Pies use textinfo instead
+                trace = {
+                    labels: chartData.labels,
+                    values: chartData.values,
+                    type: 'pie',
+                    hole: 0.4,
+                    textinfo: 'label+percent',
+                    textposition: 'inside',
+                    marker: { colors: ['#c0392b', '#7f8c8d'] }
+                };
+            } else if (chartData.type === 'bar') {
+                trace = {
+                    x: chartData.labels,
+                    y: chartData.values,
+                    type: 'bar',
+                    marker: { color: '#c0392b' }
+                };
+            } else {
+                trace = {
+                    x: chartData.labels,
+                    y: chartData.values,
+                    type: 'scatter',
+                    mode: 'lines+markers',
+                    line: { color: '#c0392b', width: 3 },
+                    marker: { size: 8 }
+                };
+            }
+
+            Plotly.newPlot('panelChart', [trace], layout, { responsive: true, displayModeBar: false });
+        }
+
+        function closeCausePanel() {
+            document.getElementById('causePanel').classList.remove('open');
+            // Clear chart after it slides out
+            setTimeout(() => {
+                const chartDiv = document.getElementById('panelChart');
+                if (chartDiv) chartDiv.innerHTML = '';
+            }, 350);
+        }
+        
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('fishboneModal');
+            if (event.target === modal) {
+                modal.style.display = "none";
+                closeCausePanel();
+            }
+        });
+    </script>
 </body>
 </html>
