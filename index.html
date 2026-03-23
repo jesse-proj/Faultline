@@ -65,23 +65,26 @@
 
                 <div class="table-responsive">
                     <table>
-                        <tr>
-                            <th style="width: 40%;">Deprivation</th>
-                            <th style="width: 60%;">Causes</th>
-                        </tr>
-                        <tr class="clickable-row" onclick="openFishbone('housing')">
-                            <td><i class="fas fa-house-damage"></i> <strong>Inadequate Housing</strong></td>
-                            <td>Intense climate change events frequently wipe out vulnerable settlements, leaving poor communities trapped in substandard housing without the resources to rebuild safely.</td>
-                        </tr>
-                        <tr class="clickable-row" onclick="openFishbone('health')">
-                            <td><i class="fas fa-heartbeat"></i> <strong>Bad Health</strong></td>
-                            <td>Labor exploitation and aggressive raw resource extraction severely pollute local environments and expose workers to physical hazards without adequate protective gear or healthcare.</td>
-                        </tr>
-                        <tr class="clickable-row" onclick="openFishbone('education')">
-                            <td><i class="fas fa-book-reader"></i> <strong>Lacking Education</strong></td>
-                            <td>Globalized industries extract wealth and rely on cheap manual labor, forcing children into work instead of school while local education systems remain chronically underfunded.</td>
-                        </tr>
-
+                        <thead>
+                            <tr>
+                                <th style="width: 40%;">Deprivation</th>
+                                <th style="width: 60%;">Causes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="clickable-row" onclick="openFishbone('housing')">
+                                <td data-label="Deprivation"><i class="fas fa-house-damage"></i> <strong>Inadequate Housing</strong></td>
+                                <td data-label="Causes">Intense climate change events frequently wipe out vulnerable settlements, leaving poor communities trapped in substandard housing without the resources to rebuild safely.</td>
+                            </tr>
+                            <tr class="clickable-row" onclick="openFishbone('health')">
+                                <td data-label="Deprivation"><i class="fas fa-heartbeat"></i> <strong>Bad Health</strong></td>
+                                <td data-label="Causes">Labor exploitation and aggressive raw resource extraction severely pollute local environments and expose workers to physical hazards without adequate protective gear or healthcare.</td>
+                            </tr>
+                            <tr class="clickable-row" onclick="openFishbone('education')">
+                                <td data-label="Deprivation"><i class="fas fa-book-reader"></i> <strong>Lacking Education</strong></td>
+                                <td data-label="Causes">Globalized industries extract wealth and rely on cheap manual labor, forcing children into work instead of school while local education systems remain chronically underfunded.</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </section>

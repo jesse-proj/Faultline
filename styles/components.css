@@ -123,7 +123,6 @@ table {
     width: 100%;
     border-collapse: collapse;
     background: var(--white);
-    min-width: 600px; 
 }
 
 th, td {
@@ -146,6 +145,44 @@ td i { color: var(--accent-red); margin-right: 8px; width: 22px; text-align: cen
     h2 { font-size: 2.2rem; }
     .stat-box .number { font-size: 2.8rem; }
     .stat-box { padding: 2rem 1.5rem; }
+
+    /* Responsive Table Stacking */
+    .table-responsive table {
+        border: 0;
+    }
+    
+    .table-responsive thead {
+        display: none; /* Hide headers on mobile */
+    }
+    
+    .table-responsive tr {
+        display: block;
+        border-bottom: 2px solid var(--border-color);
+        margin-bottom: 0.5rem;
+        padding: 1rem 0;
+    }
+    
+    .table-responsive td {
+        display: block;
+        text-align: left;
+        padding: 0.5rem 1.2rem;
+        border-bottom: 0;
+        position: relative;
+    }
+
+    .table-responsive td::before {
+        content: attr(data-label);
+        display: block;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        color: var(--accent-red);
+        margin-bottom: 0.3rem;
+    }
+
+    .table-responsive td i {
+        display: none; /* Hide icons in mobile labels to save space */
+    }
 }
 
 /* --- QUIZ & MODAL STYLING --- */
@@ -476,11 +513,118 @@ mark.highlight {
 }
 
 @media (max-width: 768px) {
-    .fishbone-chart { height: auto; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
-    .fishbone-spine, .rib, .fishbone-top, .fishbone-bottom { display: none; }
-    .fishbone-head { position: static; width: 100%; transform: none; margin-bottom: 2rem; }
-    .fishbone-head::before { display: none; }
-    .cause-box { position: static; transform: none !important; width: 100%; border-color: #555; }
+    .fishbone-content {
+        padding: 20px 15px; /* Reduce padding to save space on mobile */
+    }
+
+    .fishbone-chart { 
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem 0;
+        align-items: center; 
+        padding: 0;
+        margin-top: 2rem;
+        position: relative;
+        height: auto;
+    }
+    
+    .fishbone-spine { 
+        display: block;
+        width: 4px;
+        height: calc(100% - 30px); /* Leave room for head */
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        border-radius: 3px;
+        z-index: 1;
+    }
+
+    .fishbone-top, .fishbone-bottom { 
+        display: contents; /* Let ribs participate in the grid directly */
+    }
+
+    .rib { 
+        display: flex;
+        width: 100%;
+        height: auto;
+        position: relative;
+        background: transparent;
+        transform: none !important;
+        margin: 0;
+    }
+
+    /* Left side (1st rib of top and bottom) */
+    .fishbone-top .rib:nth-child(1),
+    .fishbone-bottom .rib:nth-child(1) {
+        justify-content: flex-end;
+        padding-right: 15px;
+    }
+
+    /* Right side (2nd rib of top and bottom) */
+    .fishbone-top .rib:nth-child(2),
+    .fishbone-bottom .rib:nth-child(2) {
+        justify-content: flex-start;
+        padding-left: 15px;
+    }
+
+    .cause-box { 
+        position: relative;
+        width: 100%; /* Fill available space up to max */
+        max-width: 130px;
+        padding: 0.6rem;
+        font-size: 0.75rem;
+        transform: none !important;
+        left: auto !important; right: auto !important; top: auto !important; bottom: auto !important;
+        z-index: 2;
+    }
+
+    /* Connecting lines pointing towards the spine */
+    .fishbone-top .rib:nth-child(1) .cause-box::after,
+    .fishbone-bottom .rib:nth-child(1) .cause-box::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: -15px;
+        width: 15px;
+        height: 3px;
+        background-color: var(--accent-red);
+        z-index: -1;
+    }
+    .fishbone-top .rib:nth-child(2) .cause-box::after,
+    .fishbone-bottom .rib:nth-child(2) .cause-box::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: -15px;
+        width: 15px;
+        height: 3px;
+        background-color: var(--accent-red);
+        z-index: -1;
+    }
+
+    .fishbone-head { 
+        position: relative;
+        grid-column: 1 / -1;
+        justify-self: center;
+        width: 80%;
+        transform: none;
+        left: auto; right: auto; top: auto;
+        margin-top: 1.5rem;
+        padding: 0.8rem;
+        z-index: 3;
+    }
+
+    .fishbone-head::before { 
+        content: '';
+        position: absolute;
+        top: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 0 12px 20px 12px;
+        border-style: solid;
+        border-color: transparent transparent var(--accent-red) transparent;
+    }
 }
 
 /* --- FISHBONE SIDE PANEL --- */
