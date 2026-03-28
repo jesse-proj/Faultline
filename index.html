@@ -54,13 +54,13 @@
                 <div class="grid-2">
                     <div class="card">
                         <h3>Absolute & Relative</h3>
-                        <p><strong>Absolute Poverty:</strong> Unable to meet a minimum standard of living (approx. 3% of Singaporeans).</p>
-                        <p style="margin-top: 1rem;"><strong>Relative Poverty:</strong> Basic needs are met, but deprived of typical societal opportunities (approx. 25% of Singaporeans).</p>
+                        <p><strong>Absolute Poverty:</strong> A condition where an individual or family is unable to meet the minimum standard of living required for basic survival.</p>
+                        <p style="margin-top: 1rem;"><strong>Relative Poverty:</strong> When basic survival needs are met, but individuals are deprived of the typical opportunities and standards of living prevalent in their specific society.</p>
                     </div>
                     <div class="card">
                         <h3>Situational & Generational</h3>
-                        <p><strong>Situational:</strong> Caused by sudden changes (medical emergency, job loss, natural disaster). Usually temporary with government aid.</p>
-                        <p style="margin-top: 1rem;"><strong>Intergenerational:</strong> Chronic poverty passed down. Extremely difficult to escape due to systemic resource lack.</p>
+                        <p><strong>Situational:</strong> Temporary poverty caused by sudden, unforeseen changes such as medical emergencies, job loss, or natural disasters.</p>
+                        <p style="margin-top: 1rem;"><strong>Intergenerational:</strong> Chronic poverty passed down through families, often becoming a cycle that is extremely difficult to escape due to systemic lack of resources.</p>
                     </div>
                 </div>
 
@@ -74,15 +74,24 @@
                         </thead>
                         <tbody>
                             <tr class="clickable-row" onclick="openFishbone('housing')">
-                                <td data-label="Deprivation"><i class="fas fa-house-damage"></i> <strong>Inadequate Housing</strong></td>
+                                <td data-label="Deprivation">
+                                    <i class="fas fa-house-damage"></i> <strong>Inadequate Housing</strong>
+                                    <span style="display: block; font-size: 0.75rem; opacity: 0.7; margin-top: 0.2rem; color: var(--accent-red);"><i class="fas fa-mouse-pointer"></i> Click for Analysis</span>
+                                </td>
                                 <td data-label="Causes">Intense climate change events frequently wipe out vulnerable settlements, leaving poor communities trapped in substandard housing without the resources to rebuild safely.</td>
                             </tr>
                             <tr class="clickable-row" onclick="openFishbone('health')">
-                                <td data-label="Deprivation"><i class="fas fa-heartbeat"></i> <strong>Bad Health</strong></td>
+                                <td data-label="Deprivation">
+                                    <i class="fas fa-heartbeat"></i> <strong>Bad Health</strong>
+                                    <span style="display: block; font-size: 0.75rem; opacity: 0.7; margin-top: 0.2rem; color: var(--accent-red);"><i class="fas fa-mouse-pointer"></i> Click for Analysis</span>
+                                </td>
                                 <td data-label="Causes">Labor exploitation and aggressive raw resource extraction severely pollute local environments and expose workers to physical hazards without adequate protective gear or healthcare.</td>
                             </tr>
                             <tr class="clickable-row" onclick="openFishbone('education')">
-                                <td data-label="Deprivation"><i class="fas fa-book-reader"></i> <strong>Lacking Education</strong></td>
+                                <td data-label="Deprivation">
+                                    <i class="fas fa-book-reader"></i> <strong>Lacking Education</strong>
+                                    <span style="display: block; font-size: 0.75rem; opacity: 0.7; margin-top: 0.2rem; color: var(--accent-red);"><i class="fas fa-mouse-pointer"></i> Click for Analysis</span>
+                                </td>
                                 <td data-label="Causes">Globalized industries extract wealth and rely on cheap manual labor, forcing children into work instead of school while local education systems remain chronically underfunded.</td>
                             </tr>
                         </tbody>
@@ -476,10 +485,13 @@
             const data = fishboneData[id];
             document.getElementById('fishboneTitle').innerText = data.title;
             document.getElementById('fishboneEffect').innerText = data.effect;
-            document.getElementById('cause1').innerText = data.causes[0].title;
-            document.getElementById('cause2').innerText = data.causes[1].title;
-            document.getElementById('cause3').innerText = data.causes[2].title;
-            document.getElementById('cause4').innerText = data.causes[3].title;
+            
+            const iconHtml = '<i class="fas fa-mouse-pointer" style="font-size: 0.8rem; margin-right: 6px; opacity: 0.8;"></i> ';
+            document.getElementById('cause1').innerHTML = iconHtml + data.causes[0].title;
+            document.getElementById('cause2').innerHTML = iconHtml + data.causes[1].title;
+            document.getElementById('cause3').innerHTML = iconHtml + data.causes[2].title;
+            document.getElementById('cause4').innerHTML = iconHtml + data.causes[3].title;
+            
             document.getElementById('fishboneDesc').innerText = data.desc;
             document.getElementById('fishboneModal').style.display = 'block';
             closeCausePanel(); 
