@@ -23,14 +23,14 @@ const supplyChainConfig = {
         "stat2": 60,
         "stat3": 80
     },
-    "gameOverText": "Without a social safety net, your body has given out entirely. You collapse on the factory floor and are dragged off the line. Management replaces you within the hour. You return to your boarding house with nothing—no severance, no savings, and a family waiting on a remittance that will never come.",
+    "gameOverText": "Without a social safety net, your body has given out entirely. You collapse on the factory floor and are dragged off the line. Management replaces you within the hour. You return to your boarding house in Bac Ninh with nothing—no severance, no savings, and a family waiting on a remittance that will never come.",
     "nodes": {
         "1": {
             "image": "images/sc_factory_floor.png",
-            "text": "<strong style='color: var(--accent-red);'>Shift 1: The Factory Floor.</strong> You recently left your province to take a job at a global electronics assembly plant in Caloocan. You live in a cramped boarding house with strangers. Your goal: survive the high cost of living in the city and send remittance back to your family. Today, the floor manager stands on a catwalk, demanding everyone work an unsanctioned 14-hour shift to meet an international export quota for a Western tech corporation's newest smartphone release.",
+            "text": "<strong style='color: var(--accent-red);'>Shift 1: The Factory Floor.</strong> You recently left your province to take a job at a massive electronics plant in Bac Ninh, Vietnam. You live in a cramped boarding house with strangers. Your goal: survive the high cost of living and send money back to your family. Today, the floor manager stands on a catwalk, demanding everyone work an unsanctioned 14-hour shift to meet an international export quota for a Western corporation's newest smartphone release.",
             "choices": [
                 {
-                    "text": "Work the brutal shift for extra pay.",
+                    "text": "Work the brutal shift for extra dong.",
                     "impact": {
                         "stat1": -15,
                         "stat2": 25,
@@ -48,7 +48,7 @@ const supplyChainConfig = {
                     "nextNode": "3"
                 },
                 {
-                    "text": "Argue with the manager about labor laws.",
+                    "text": "Argue with the manager about Vietnam labor laws.",
                     "impact": {
                         "stat1": -20,
                         "stat2": -25,
@@ -60,7 +60,7 @@ const supplyChainConfig = {
         },
         "2": {
             "image": "images/sc_remittance.png",
-            "text": "<strong style='color: var(--accent-red);'>Shift 2: The Lead Worker.</strong> Because you worked the grueling overtime shift and met the impossible quota without complaining, management names you 'Lead Worker.' It sounds like a promotion, but it comes with zero pay raise. Instead, you are now personally responsible for ensuring the five people next to you on the assembly line meet their quotas as well. The pressure from above is immense.",
+            "text": "<strong style='color: var(--accent-red);'>Shift 2: The Lead Worker.</strong> Because you worked the grueling shift without complaining, management names you 'Lead Worker.' It sounds like a promotion, but your pay remains unchanged. Instead, you are now personally responsible for ensuring the five people next to you on the assembly line meet their intense, complex assembly quotas as well. The pressure from above is immense.",
             "choices": [
                 {
                     "text": "Push your team to the absolute brink.",
@@ -93,7 +93,7 @@ const supplyChainConfig = {
         },
         "3": {
             "image": "images/sc_remittance.png",
-            "text": "<strong style='color: var(--accent-red);'>Shift 2: The Pay Cut.</strong> Since your hours were maliciously cut by management, you are struggling to make rent. The rainy season has flooded the streets, and water is continuously seeping into your cramped, ground-floor boarding house. The landlord violently bangs on your door, demanding next month's rent early with an arbitrary 'late fee' attached.",
+            "text": "<strong style='color: var(--accent-red);'>Shift 2: The Pay Cut.</strong> Since your hours were maliciously cut by management, you are struggling to make rent. The monsoon rains have flooded the streets of Bac Ninh, and water is continuously seeping into your cramped boarding house. The landlord violently bangs on your door, demanding next month's rent early with an arbitrary 'late fee' attached.",
             "choices": [
                 {
                     "text": "Take a microloan from an outside lender.",
@@ -126,7 +126,7 @@ const supplyChainConfig = {
         },
         "4": {
             "image": "images/sc_cough.png",
-            "text": "<strong style='color: var(--accent-red);'>Shift 2: The Toxic Task.</strong> As punishment, you are assigned to clean the chemical flux vats in the deep basement of the factory. The ventilation down here has been broken for years. The fumes from the harsh industrial solvents are overwhelming, making your eyes water and your throat burn. Standard procedure requires a heavy-duty respirator.",
+            "text": "<strong style='color: var(--accent-red);'>Shift 2: The Toxic Task.</strong> As punishment, you are assigned to clean the chemical flux vats in the deep basement of the factory. The ventilation down here is broken. You are constantly exposed to industrial solvents, fumes, and unshielded magnetic radiation without warning or proper gear. The fumes are overwhelming, making your eyes water and your throat burn.",
             "choices": [
                 {
                     "text": "Buy a disposable respirator out of pocket.",
@@ -159,7 +159,7 @@ const supplyChainConfig = {
         },
         "5": {
             "image": "images/sc_audit.png",
-            "text": "<strong style='color: var(--accent-red);'>Shift 3: Corporate Audit.</strong> A well-dressed Western NGO team arrives to audit the factory for 'ethical labor practices.' Your floor manager pulls you aside. He orders you to lie to the clipboard-wielding auditors, explicitly telling you to say that you only work 8 hours a day, get regular breaks, and feel safe. He slips a small roll of cash into your pocket as a bribe.",
+            "text": "<strong style='color: var(--accent-red);'>Shift 3: Corporate Audit.</strong> A well-dressed Western NGO team arrives to audit the factory for 'ethical labor practices.' Your floor manager pulls you aside. He orders you to lie to the clipboard-wielding auditors, explicitly telling you to say that you only work 8 hours a day, get regular breaks, and feel safe in the facility. He slips a roll of cash into your pocket as a bribe.",
             "choices": [
                 {
                     "text": "Take the bribe and lie to the auditors.",
@@ -192,7 +192,7 @@ const supplyChainConfig = {
         },
         "6": {
             "image": "images/sc_gig_economy.png",
-            "text": "<strong style='color: var(--accent-red);'>Shift 3: Burnout.</strong> The relentless, punishing pace of the assembly line is destroying your joints and your sanity. A line foreman notices you slowing down. In the bathroom, he offers you a handful of small white pills—illegal amphetamines—promising they will keep your speed up so you don't get fired for missing the quarterly targets.",
+            "text": "<strong style='color: var(--accent-red);'>Shift 3: Burnout.</strong> The relentless, punishing pace of the assembly line is destroying your joints and your sanity. You're suffering from chronic headaches, backaches, and persistent nausea typical of line workers here. A line foreman notices you slowing down. In the bathroom, he offers you illegal amphetamines promising they will keep your speed up so you don't get fired.",
             "choices": [
                 {
                     "text": "Pay for the pills just to survive.",
@@ -258,7 +258,7 @@ const supplyChainConfig = {
         },
         "8": {
             "image": "images/sc_cough.png",
-            "text": "<strong style='color: var(--accent-red);'>Shift 3: Illness.</strong> You are severely ill. Your chest burns with every breath, and you can barely stand. You stagger to the company doctor, who essentially treats you like a broken machine part slowing down the production line. He coldly tells you to buy imported antibiotics or get out.",
+            "text": "<strong style='color: var(--accent-red);'>Shift 3: Illness.</strong> You are severely ill. Due to the chronic exposure on the electronics line, you have developed severe rashes and debilitating migraines. You stagger to the company doctor, who essentially treats you like a broken machine part slowing down the production line. He coldly tells you to buy imported antibiotics or get out.",
             "choices": [
                 {
                     "text": "Empty your savings for imported medicine.",
@@ -328,11 +328,11 @@ const supplyChainConfig = {
         },
         "e12": {
             "isEnding": true,
-            "text": "The Debt Peonage. You survived by making compromises, taking loans, and sacrificing your health and family. You still have your job, but your paycheck is entirely garnished by the landlord, the clinic, and the company store. You work 12 hours a day, generating massive value for the shareholders, but you will never pay off the principal of your debt. You are a modern indentured servant."
+            "text": "The Debt Peonage. You survived by making compromises, taking loans, and sacrificing your health and family. You still have your job at the assembly plant, but your paycheck is entirely garnished by the landlord, the clinic, and the company store. You work over 12 hours a day, generating massive value for shareholders, but you will never pay off the principal of your debt. You are a modern indentured servant in the tech supply chain."
         },
         "e13": {
             "isEnding": true,
-            "text": "The Discarded Machine. You made bad choices or let your health fail. Your body breaks under the weight of the global supply chain. The factory fires you the moment you can no longer meet the quota. The next day, a fresh, healthy migrant from the provinces takes your exact spot on the assembly line. The machine continues unchecked, and you are left destitute."
+            "text": "The Discarded Machine. You made bad choices or let your health fail. Your body breaks under the weight of the global supply chain, succumbing to exhaustion and chemical hazards. The factory fires you the moment you can no longer meet the quota. The next day, a fresh, healthy migrant from the provinces takes your exact spot on the assembly line. The machine continues unchecked, and you are left destitute."
         }
     }
 };
